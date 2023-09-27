@@ -14,8 +14,7 @@
     }
 </style>
 <h2>
-    Bienvenido al sistema de gestion de pacientes <br>
-    GestionSalud
+    hola como estan?
 </h2>
 <br>
 <div align="center">
