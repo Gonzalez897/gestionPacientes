@@ -15,6 +15,7 @@
 <div>
     <h2>
         consultas
+        robinson mi amor q culo!!
     </h2>
 </div>
 @endsection
