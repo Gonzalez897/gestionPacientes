@@ -14,7 +14,7 @@
 </style>
 <div>
     <h2>
-        Aqui se haran consultas a los pacientes
+        consultas
     </h2>
 </div>
 @endsection
