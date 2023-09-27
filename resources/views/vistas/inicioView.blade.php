@@ -14,7 +14,7 @@
     }
 </style>
 <h2>
-    hola como estan?
+    Esta es la pagina de inicio!
 </h2>
 <br>
 <div align="center">
