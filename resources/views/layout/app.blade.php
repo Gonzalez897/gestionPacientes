@@ -15,6 +15,7 @@
 
         .links {
             color: white;
+            padding: 15px;
         }
 
         .links:hover{
