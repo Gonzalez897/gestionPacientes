@@ -14,7 +14,7 @@
                 <div class="col-3">
                     <span>Nombre usuarios</span>
                     <br>
-                    <input type="text" name="usuario" value="{{ old('usuario') }}">
+                    <input  class="form-control" type="text" name="usuario" value="{{ old('usuario') }}">
                     @error('usuario')
                     <span class="invalid-feedback d-block" role="alert">
                         <strong>{{$message}}</strong>
@@ -23,7 +23,7 @@
                     <br>
                     <span>Constraseña</span>
                     <br>
-                    <input type="password" name="clave" value="{{ old('clave') }}">
+                    <input class="form-control" type="password" name="clave" value="{{ old('clave') }}">
                     @error('clave')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{ $message }}</strong>
@@ -32,23 +32,31 @@
                     <br>
                     <span>Confirmar Contraseña</span>
                     <br>
-                    <input type="password" name="conf_clave" value="{{ old('conf_clave') }}">
+                    <input  class="form-control" type="password" name="conf_clave" value="{{ old('conf_clave') }}">
                     @error('conf_clave')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
                     <span>Estado del usuario</span>
+                    <br><br>
+                    <select class="form-control" name="" id="">
+                        <option value="">~</option>
+                        <option value="superAdmin">super Admin</option>
+                        <option value="admin">administrador</option>
+                        <option value="empleado">empleado</option>
+                    </select>
                     @error('conf_clave')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
+                        
                     @enderror
                 </div>
                 <div class="col-3">
                     <span>Nombre del empleado</span>
                     <br>
-                    <input type="text" name="nombre_empleado" value="{{ old('nombre_empleado') }}">
+                    <input   class="form-control" type="text" name="nombre_empleado" value="{{ old('nombre_empleado') }}">
                     @error('nombre_empleado')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{ $message }}</strong>
@@ -57,7 +65,7 @@
                     <br>
                     <span>Apellido del empleado</span>
                     <br>
-                    <input type="text" name="apellido_empleado" value="{{ old('apellido_empleado') }}">
+                    <input class="form-control" type="text" name="apellido_empleado" value="{{ old('apellido_empleado') }}">
                     @error('apellido_empleado')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{ $message }}</strong>
@@ -66,7 +74,7 @@
                     <br>
                     <span>Dui del empleado</span>
                     <br>
-                    <input type="text" name="dui_empleado" value="{{ old('dui_empleado') }}">
+                    <input class="form-control" type="text" name="dui_empleado" value="{{ old('dui_empleado') }}">
                     @error('dui_empleado')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{ $message }}</strong>
@@ -75,7 +83,7 @@
                     <br>
                     <span>Cargo del empleado</span>
                     <br>
-                    <select name="cargo_empleado" id="">
+                    <select class="form-control"  name="cargo_empleado" id="">
                         @if (old('cargo_empleado') == "Empleado")
                         <option value="">~</option>
                         <option value="Empleado" selected>Empleado</option>
@@ -109,7 +117,7 @@
                     <br>
                     <span>Fecha de nacimiento</span>
                     <br>
-                    <input type="date" name="fecha_nacimiento" id="" value="{{ old('fecha_nacimiento') }}">
+                    <input class="form-control" type="date" name="fecha_nacimiento" id="" value="{{ old('fecha_nacimiento') }}">
                     @error('fecha_nacimiento')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{ $message }}</strong>
@@ -120,7 +128,7 @@
                     <span class="text-danger">si su cargo es doctor, ingrese su especialidad</span><br>
                     <span class="h5">especialidad</span>
                     <br>
-                    <input type="text" name="especialidad" value="{{ old('especialidad') }}">
+                    <input class="form-control" type="text" name="especialidad" value="{{ old('especialidad') }}">
                     @error('especialidad')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{ $message }}</strong>
@@ -129,7 +137,7 @@
                 </div>
             </div>
             <div class="card-footer text-center">
-                <input type="submit" value="Enviar Datos">
+                <input type="submit" value="Enviar Datos" class="btn btn-primary">
             </div>
         </div>
     </div>

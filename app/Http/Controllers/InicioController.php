@@ -27,4 +27,13 @@ class InicioController extends Controller
         return view('vistas/recetasView');
     }
 
+    public function login() {
+        return view('vistas/loginView');
+    }
+
+    public function consultaEmpleados() {
+        return view('vistas/consultaEmpleadosView');
+    }
+
+
 }
