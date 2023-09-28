@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [InicioController::class,'inicio']);
+Route::get('/', [LoginController::class, 'index']);
+
+Route::post('/ingresoEmpleados', [LoginController::class, 'store'])->name('ingresoEmpleados');
+
+Route::get('/inicio', [InicioController::class,'inicio']);
 
 Route::get('/consultas', [InicioController::class, 'consultas'])->name('consultas');
 
 Route::get('/doctores', [InicioController::class, 'doctores'])->name('doctores');
+
