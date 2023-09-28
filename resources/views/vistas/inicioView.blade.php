@@ -14,8 +14,7 @@
     }
 </style>
 <h2>
-    Bienvenido al sistema de gestion de pacientes <br>
-    GestionSalud
+    Esta es la pagina de inicio!
 </h2>
 <br>
 <div align="center">
