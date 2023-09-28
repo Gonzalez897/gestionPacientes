@@ -32,7 +32,7 @@
     }
 </style>
 <h2>
-    hola como estan?
+    Sistema de gestion pacientes.
 </h2>
 <br>
 <div align="center">
