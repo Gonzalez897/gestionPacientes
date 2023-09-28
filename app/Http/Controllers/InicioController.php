@@ -18,4 +18,13 @@ class InicioController extends Controller
     public function doctores() {
         return view('vistas/doctoresView');
     }
+
+    public function citas() {
+        return view('vistas/citasView');
+    }
+
+    public function recetas() {
+        return view('vistas/recetasView');
+    }
+
 }

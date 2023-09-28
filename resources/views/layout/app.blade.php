@@ -11,6 +11,7 @@
         
         #barraNavegacion {
             background-color: #2596be;
+            justify-content: left;
         }
 
         .links {
@@ -27,9 +28,7 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body style="background-color: #3140ac">
-    <div id="div1" align="center">
-        <img src="{{ asset('imagenesSistema/imagenEmpresa1.jpg') }}" alt="" style="height: 120px; width: 30%">
-    </div>
+    
     <nav class="navbar navbar-expand-sm" id="barraNavegacion">
         <!-- Brand/logo -->
         <a class="navbar-brand" href="/" style="margin-left: 15px">
@@ -47,6 +46,15 @@
             <li class="nav-item">
                 <a class="nav-link" href="/doctores"><span class="links">Doctores</span></a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/citas"><span class="links">citas</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/recetas"><span class="links">recetas</span></a>
+            </li>
+            
         </ul>
     </nav>
     <br>

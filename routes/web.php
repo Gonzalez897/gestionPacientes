@@ -19,3 +19,7 @@ Route::get('/', [InicioController::class,'inicio']);
 Route::get('/consultas', [InicioController::class, 'consultas'])->name('consultas');
 
 Route::get('/doctores', [InicioController::class, 'doctores'])->name('doctores');
+
+Route::get('/citas', [InicioController::class, 'citas'])->name('citas');
+
+Route::get('/recetas', [InicioController::class, 'recetas'])->name('recetas');
