@@ -38,13 +38,6 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-                    <br>
-                    @error('estado_usuario')
-                        <span class="invalid-feedback d-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        
-                    @enderror
                 </div>
                 <div class="col-3">
                     <span>Nombre del empleado</span>
