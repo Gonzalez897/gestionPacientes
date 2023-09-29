@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DoctorModel;
+use App\Models\EmpleadoModel;
 use App\Models\UsuarioModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -14,9 +17,8 @@ class LoginController extends Controller
      */
     public function index()
     {
-        $usuarios = UsuarioModel::select('usuarios', 'estado')->where('estado', 'Admistrador');
 
-        return view('login/empleadosView', compact('usuarios'));
+        return view('login/empleadosView');
     }
 
     /**
@@ -37,16 +39,69 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        $datos = $request()->validate([
+        $datos = request()->validate([
             'usuario' => 'required',
             'clave' => 'required',
             'conf_clave' => 'required|same:clave',
-            'nombre_emplado' => 'required',
+            'nombre_empleado' => 'required',
             'apellido_empleado' => 'required',
             'dui_empleado' => 'required',
             'cargo_empleado' => 'required',
             'fecha_nacimiento' => 'required'
         ]);
+
+        $empleados = [
+            'nombre' => $datos['nombre_empleado'],
+            'apellido' => $datos['apellido_empleado'],
+            'dui' => $datos['dui_empleado'],
+            'cargo' => $datos['cargo_empleado'],
+            'fecha_nacimiento' => $datos['fecha_nacimiento'],
+        ];
+
+        EmpleadoModel::create($empleados);
+
+        $empleado_ingresado = EmpleadoModel::latest()->first();
+
+        $consulta_superusuarios = UsuarioModel::select('estado')->where('estado','superusuario')->get();
+
+        $usuarios = [];
+
+        if (count($consulta_superusuarios) == 0) {
+            
+            $usuarios = [
+                'usuario' => $datos['usuario'],
+                'clave' => Hash::make($datos['clave']),
+                'estado' => 'superusuario',
+                'idEmpleados' => $empleado_ingresado->idEmpleados
+            ];
+
+            UsuarioModel::create($usuarios);
+        }else{
+
+            $usuarios = [
+                'usuario' => $datos['usuario'],
+                'clave' => Hash::make($datos['clave']),
+                'estado' => 'empleado',
+                'idEmpleados' => $empleado_ingresado->idEmpleados
+            ];
+
+            UsuarioModel::create($usuarios);
+        }
+
+        $doctores = [];
+
+        if ($datos['cargo_empleado'] == "Doctor") {
+            
+            $doctores = [
+                'idEmpleados' => $empleado_ingresado->idEmpleados,
+                'especializacion' => $request->input('especialidad')
+            ];
+
+            DoctorModel::create($doctores);
+            
+        }
+
+        return redirect('/');
     }
 
     /**

@@ -6,7 +6,7 @@
 <h2 class="text-center text-light">
     Ingreso de Empleados
 </h2>
-<form action="{{ route('ingresoEmpleados') }}" method="POST">
+<form action="{{ route('ingresoEmpleados') }}" method="POST" autocomplete="off">
     @csrf
     <div class="container">
         <div class="card bg-muted">
@@ -38,8 +38,8 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-                    <span>Estado del usuario</span>
-                    @error('conf_clave')
+                    <br>
+                    @error('estado_usuario')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

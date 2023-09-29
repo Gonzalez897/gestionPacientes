@@ -15,11 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [LoginController::class, 'index']);
+Route::get('/formEmpleados', [LoginController::class, 'index']);
 
 Route::post('/ingresoEmpleados', [LoginController::class, 'store'])->name('ingresoEmpleados');
 
-Route::get('/inicio', [InicioController::class,'inicio']);
+Route::get('/', [InicioController::class,'inicio']);
 
 Route::get('/consultas', [InicioController::class, 'consultas'])->name('consultas');
 
