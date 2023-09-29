@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\InicioController;
-use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CitasController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\InicioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +26,24 @@ Route::get('/consultas', [InicioController::class, 'consultas'])->name('consulta
 
 Route::get('/doctores', [InicioController::class, 'doctores'])->name('doctores');
 
-Route::get('/citas', [InicioController::class, 'citas'])->name('citas');
+// CITAS RUTAS SIN CRUD
+Route::get('/citasCreate', [InicioController::class, 'citasCreate'])->name('citas');
+Route::get('/citasShow', [InicioController::class, 'citasShow'])->name('citas');
+Route::get('/citasUpdate', [InicioController::class, 'citasUpdate'])->name('citas');
+
+// CITAS RUTAS CON CRUD
+Route::get('/vistas/Citas/citasShow', [CitasController::class,'index']);
+Route::get('/vistas/Citas/citasCreate', [CitasController::class,'create']);
+Route::post('/vistas/Citas/citasStore', [CitasController::class,'store']);
+// Route::get('/tareas/edit/{tareas}', [TareaController::class,'edit']);
+// Route::put('/tareas/update/{tareas}', [TareaController::class,'update']);
+// Route::delete('/tareas/destroy/{tareas}',[TareaController::class, 'destroy']);
+
+
 
 Route::get('/recetas', [InicioController::class, 'recetas'])->name('recetas');
+
+Route::get('/Pacientes', [InicioController::class, 'Pacientes'])->name('Pacientes');
 
 Route::get('/login', [InicioController::class, 'login'])->name('login');
 
