@@ -37,24 +37,24 @@
         <div class="div2">
             <form action="">
                 <div class="mb-3 p-3">
-                    <label class="form-label tet-left" for="idcita">Id cita</label>
-                    <input class="form-control" type="text"  id="idcita" >
+                    <label class="form-label tet-left" for="idconsulta">id consulta</label>
+                    <input class="form-control" type="text"  id="idconsulta" >
                 </div>
                 <div class="mb-3 p-3">
-                    <label class="form-label" for="nombreCita">Nombre cita</label>
-                    <input type="text" class="form-control" placeholder="ingrese nombre de la cita" id="nombreCita">
+                    <label class="form-label" for="nombreConsul">nombre consulta</label>
+                    <input type="text" class="form-control" placeholder="ingrese nombre de la consulta" id="nombreConsul">
                 </div>
                 <div class="p-3">
-                    <label class="form-label" for="motivo">Motivo</label>
-                    <textarea placeholder="describa sus sintomas" class="form-control" id="motivo" cols="30" rows="10"></textarea>
+                    <label class="form-label" for="descripcion">descripcion</label>
+                    <textarea placeholder="describa sus sintomas" class="form-control" id="descripcion" cols="30" rows="10"></textarea>
                 </div>
     
                 <div class="mb-3 p-3">
-                    <label class="form-label" for="fechaCita">Fecha cita</label>
-                    <input type="date" id="fechaCita" class="form-control">
+                    <label class="form-label" for="nombreConsul">fecha consulta</label>
+                    <input type="text" class="form-control" placeholder="ingrese fecha de la cunsulta">
                 </div>
                 <div class="boton">
-                    <button type="button" class="btn btn-outline-primary">Ingresar cita</button>
+                    <button type="button" class="btn btn-outline-primary">ingresar consulta</button>
                 </div>
             </form>
         </div>

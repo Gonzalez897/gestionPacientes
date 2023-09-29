@@ -54,9 +54,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="/recetas"><span class="links">recetas</span></a>
             </li>
-            
-            
-
+            <li class="nav-item">
+                <a class="nav-link" href="/Pacientes"><span class="links">Pacientes</span></a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/login"><span class="links">login</span></a>
             </li>

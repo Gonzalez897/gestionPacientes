@@ -27,6 +27,10 @@ class InicioController extends Controller
         return view('vistas/recetasView');
     }
 
+    public function Pacientes() {
+        return view('vistas/pacientesView');
+    }
+
     public function login() {
         return view('vistas/loginView');
     }

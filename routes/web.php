@@ -29,6 +29,8 @@ Route::get('/citas', [InicioController::class, 'citas'])->name('citas');
 
 Route::get('/recetas', [InicioController::class, 'recetas'])->name('recetas');
 
+Route::get('/Pacientes', [InicioController::class, 'Pacientes'])->name('Pacientes');
+
 Route::get('/login', [InicioController::class, 'login'])->name('login');
 
 Route::get('/consultaEmpleados', [InicioController::class, 'consultaEmpleados'])->name('ConsultaEmpleados');
