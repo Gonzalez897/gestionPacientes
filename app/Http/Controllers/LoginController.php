@@ -101,7 +101,21 @@ class LoginController extends Controller
             
         }
 
-        return redirect('/');
+        return redirect('/formEmpleado');
+    }
+
+    public function consultaEmpleados(Request $request){
+
+        $consultaDatos = [
+            'nombre' => $request->input('nombre'),
+            'apellido' => $request->input('apellido'),
+            'dui' => $request->input('dui'),
+            'cargo' => $request->input('cargo')
+        ];
+
+        $consulta_empleados = UsuarioModel::select('E.nombre','E.apellido', 'E.dui', 'E.cargo',
+        'U.usuario', 'U.estado');
+
     }
 
     /**

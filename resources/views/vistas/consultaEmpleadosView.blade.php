@@ -18,44 +18,52 @@
     }
     
 </style>
-<h2>
-   Consulta de empleados
-</h2>
 <div class="container">
-    <div class="div4">
-        <form action="">
-            <div class="mb-3 p-3">
-                <label class="form-label text-left " for="name">nombre</label>
-                <input  class="form-control" type="text" id="name" placeholder="ingrese su nombre">
+    <form action="/busquedaEmpleados" post="POST" autocomplete="off">
+        <div class="card">
+            <div class="card-header text-center">
+                <span class="h2">Consulta de Empleados</span>
             </div>
-
-            <div class="mb-3 p-3">
-                <label  class="form-label" for="apellido">apellido</label>
-                <input  class="form-control" type="text" id="apellido" placeholder="ingrese su apellido">
+            <div class="card-body" style="background-color: #2471A3">
+                <div class="row">
+                    <div class="col-12 text-light">
+                        <div class="row">
+                            <div class="col-3">
+                                <span>Nombre del Empleado</span>
+                                <br>
+                                <input type="text" name="nombre" class="form-control" placeholder="Ingrese el apellido del empleado">
+                            </div>
+                            <div class="col-3 offset-1">
+                                <span>Apellido del Empleado</span>
+                                <br>
+                                <input type="text" name="apellido" class="form-control" placeholder="Ingrese el apellido del empleado">
+                            </div>
+                            <div class="col-3 offset-1">
+                                <span>Dui del empleado</span>
+                                <br>
+                                <input type="text" name="dui" class="form-control" placeholder="00000000-0" maxlength="9" id="">
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-3">
+                                <span>Cargo del empleado</span>
+                                <br>
+                                <select name="cargo" id="" class="form-control">
+                                    <option value="">~</option>
+                                    <option value="Empleado">Empleado</option>
+                                    <option value="Secretaria">Secretaria</option>
+                                    <option value="Doctor">Doctor</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="mb-3 p-3">
-                <label class="form-label" for="dui">dui</label>
-                <input class="form-control" type="text" id="dui" placeholder="ingrese su dui">
+            <div class="card-footer text-center">
+                <input type="submit" value="Enviar consulta" class="btn btn-primary">
             </div>
-
-            <div class="mb-3 p-3 ">
-                <label class="form-label" for="cargo">usuario</label>
-                <input class="form-control" type="text" id="cargo" placeholder="ingrese su usuario">
-            </div>
-
-            <div class="mb-3 p-3">
-                <label class="form-label" for="cargo">cargo</label>
-                <input class="form-control" type="text" id="cargo" placeholder="ingrese su cargo">
-            </div>
-
-
-            <div class="md-3" id="btnC">
-                <button type="button" class="btn btn-outline-danger ">Consultar empleado</button>
-            </div>
-         </form>
-
-    </div>
+        </div>
+    </form>
 </div>
 
 @endSection
