@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/formEmpleados', [LoginController::class, 'index']);
+Route::get('/formEmpleado', [LoginController::class, 'index']);
 
 Route::post('/ingresoEmpleados', [LoginController::class, 'store'])->name('ingresoEmpleados');
 
@@ -25,3 +25,10 @@ Route::get('/consultas', [InicioController::class, 'consultas'])->name('consulta
 
 Route::get('/doctores', [InicioController::class, 'doctores'])->name('doctores');
 
+Route::get('/citas', [InicioController::class, 'citas'])->name('citas');
+
+Route::get('/recetas', [InicioController::class, 'recetas'])->name('recetas');
+
+Route::get('/login', [InicioController::class, 'login'])->name('login');
+
+Route::get('/consultaEmpleados', [InicioController::class, 'consultaEmpleados'])->name('ConsultaEmpleados');
