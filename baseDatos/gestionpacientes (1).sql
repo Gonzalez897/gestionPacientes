@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 28, 2023 at 08:39 AM
+-- Generation Time: Sep 29, 2023 at 04:08 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -35,7 +35,9 @@ CREATE TABLE `citas` (
   `motivo` varchar(225) NOT NULL,
   `fecha_cita` date NOT NULL,
   `idPacientes` int(11) NOT NULL,
-  `idDoctores` int(11) NOT NULL
+  `idDoctores` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
@@ -50,7 +52,9 @@ CREATE TABLE `consultas` (
   `descripcion` text NOT NULL,
   `fecha_consulta` int(11) NOT NULL,
   `idPacientes` int(11) NOT NULL,
-  `idDoctores` int(11) NOT NULL
+  `idDoctores` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
@@ -62,7 +66,9 @@ CREATE TABLE `consultas` (
 CREATE TABLE `consultas_recetas` (
   `idConsultRecetas` int(11) NOT NULL,
   `idConsultas` int(11) NOT NULL,
-  `idRecetas` int(11) NOT NULL
+  `idRecetas` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
@@ -74,7 +80,9 @@ CREATE TABLE `consultas_recetas` (
 CREATE TABLE `doctores` (
   `idDoctores` int(11) NOT NULL,
   `idEmpleados` int(11) NOT NULL,
-  `especializacion` varchar(225) NOT NULL
+  `especializacion` varchar(225) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
@@ -89,7 +97,9 @@ CREATE TABLE `empleados` (
   `apellido` varchar(225) NOT NULL,
   `dui` varchar(225) NOT NULL,
   `cargo` varchar(225) NOT NULL,
-  `fecha_nacimiento` date NOT NULL
+  `fecha_nacimiento` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
@@ -103,7 +113,9 @@ CREATE TABLE `pacientes` (
   `nombre_paciente` varchar(225) NOT NULL,
   `apellido_paciente` varchar(225) NOT NULL,
   `dui_paciente` varchar(225) NOT NULL,
-  `edad_paciente` int(11) NOT NULL
+  `edad_paciente` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
@@ -116,7 +128,9 @@ CREATE TABLE `recetas` (
   `idRecetas` int(11) NOT NULL,
   `nombre_receta` varchar(225) NOT NULL,
   `tipo_receta` varchar(225) NOT NULL,
-  `tratamiento` text NOT NULL
+  `tratamiento` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
@@ -130,7 +144,9 @@ CREATE TABLE `usuarios` (
   `usuario` varchar(225) NOT NULL,
   `clave` varchar(225) NOT NULL,
   `estado` varchar(225) NOT NULL,
-  `idEmpleados` int(11) NOT NULL
+  `idEmpleados` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -219,13 +235,13 @@ ALTER TABLE `consultas_recetas`
 -- AUTO_INCREMENT for table `doctores`
 --
 ALTER TABLE `doctores`
-  MODIFY `idDoctores` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idDoctores` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `idEmpleados` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idEmpleados` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `pacientes`
@@ -243,7 +259,7 @@ ALTER TABLE `recetas`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idUsuarios` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idUsuarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
