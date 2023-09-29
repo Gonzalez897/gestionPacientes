@@ -47,8 +47,13 @@
                 <a class="nav-link" href="/doctores"><span class="links">Doctores</span></a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="/citas"><span class="links">citas</span></a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown"><span class="links">citas</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/citasCreate">Crear Citas</a></li>
+                    <li><a class="dropdown-item" href="/citasShow">Ver Citas Creadas</a></li>
+                    <li><a class="dropdown-item" href="/citasUpdate">Actualizar Citas Creadas</a></li>
+                </ul>
             </li>
 
             <li class="nav-item">

@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('titulo', 'citas')
+@section('titulo', 'Pacientes')
 
 @section('contenido')
 <style scoped>
@@ -30,35 +30,48 @@
 </style>
 <div>
     <h2>
-        ingreso de citas
+       <b>Ingreso de Pacientes</b>
     </h2>
-
-    <div class="container">
-        <div class="div2">
-            <form action="">
-                <div class="mb-3 p-3">
-                    <label class="form-label tet-left" for="idconsulta">id consulta</label>
-                    <input class="form-control" type="text"  id="idconsulta" >
-                </div>
-                <div class="mb-3 p-3">
-                    <label class="form-label" for="nombreConsul">nombre consulta</label>
-                    <input type="text" class="form-control" placeholder="ingrese nombre de la consulta" id="nombreConsul">
-                </div>
-                <div class="p-3">
-                    <label class="form-label" for="descripcion">descripcion</label>
-                    <textarea placeholder="describa sus sintomas" class="form-control" id="descripcion" cols="30" rows="10"></textarea>
+        <!--Cuerpo de pagina-->
+        <center>
+        <br>
+        <!--form-->
+          <div class="card" style="width:1000px">
+            <div class="card-body">
+              <form class="row g-3 needs-validation" novalidate>
+                <div class="col-md-4">
+                  <label class="form-label"><b>Nombre Paciente</b></label>
+                  <input type="text" class="form-control" id="nombrePaciente" value="" required placeholder="Nombre">
                 </div>
     
-                <div class="mb-3 p-3">
-                    <label class="form-label" for="nombreConsul">fecha consulta</label>
-                    <input type="text" class="form-control" placeholder="ingrese fecha de la cunsulta">
+                <div class="col-md-4">
+                  <label class="form-label"><b>Apellido Paciente</b></label>
+                  <input type="text" class="form-control" id="apellidoPaciente" value="" required placeholder="Apellido">
                 </div>
-                <div class="boton">
-                    <button type="button" class="btn btn-outline-primary">ingresar consulta</button>
+                
+                <div class="col-md-4">
+                  <label for="validationCustomUsername" class="form-label"><b>Numero de DUI</b></label>
+                  <div class="input-group has-validation">
+                    <span class="input-group-text">N</span>
+                    <input type="text" class="form-control" id="dui" required placeholder="00000000-0">
+                  </div>
                 </div>
-            </form>
+    
+    
+              <center>
+                 <div class="col-md-4">
+                  <label class="form-label"><b>Edad Paciente</b></label>
+                  <input type="number" class="form-control" id="edadPaciente" value="" required placeholder="Edad">
+                </div>
+              </center>
+        
+                <div></div>
+    
+                <div class="col-12">
+                  <button class="btn btn-primary" type="submit">Ingresar cita</button>
+                </div>
         </div>
-    </div>
-</div>
+        
+        </center>
 
 @endsection

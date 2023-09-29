@@ -19,8 +19,16 @@ class InicioController extends Controller
         return view('vistas/doctoresView');
     }
 
-    public function citas() {
-        return view('vistas/citasView');
+    public function citasCreate() {
+        return view('vistas/Citas/citasCreate');
+    }
+    
+    public function citasShow() {
+        return view('vistas/Citas/citasShow');
+    }
+    
+    public function citasUpdate() {
+        return view('vistas/Citas/citasUpdate');
     }
 
     public function recetas() {
