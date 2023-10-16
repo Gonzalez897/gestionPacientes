@@ -1,5 +1,7 @@
 <?php
 
+//use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CitasController;
 use App\Http\Controllers\LoginController;
@@ -16,7 +18,8 @@ use App\Http\Controllers\InicioController;
 |
 */
 
-Route::get('/formEmpleado', [LoginController::class, 'index']);
+
+Route::get('/formEmpleado', [LoginController::class, 'create']);
 
 Route::post('/ingresoEmpleados', [LoginController::class, 'store'])->name('ingresoEmpleados');
 
@@ -45,6 +48,9 @@ Route::get('/recetas', [InicioController::class, 'recetas'])->name('recetas');
 
 Route::get('/Pacientes', [InicioController::class, 'Pacientes'])->name('Pacientes');
 
-Route::get('/login', [InicioController::class, 'login'])->name('login');
-
 Route::get('/consultaEmpleados', [InicioController::class, 'consultaEmpleados'])->name('ConsultaEmpleados');
+
+
+Route::get('/login', [LoginController::class, 'index'])->name('loginNuevo');
+
+Route::post('/loginValidar', [LoginController::class, 'validacionLogin'])->name('validarUsuario');

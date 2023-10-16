@@ -6,6 +6,7 @@ use App\Models\DoctorModel;
 use App\Models\EmpleadoModel;
 use App\Models\UsuarioModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
@@ -17,8 +18,27 @@ class LoginController extends Controller
      */
     public function index()
     {
+        return view('vistas/loginView');
+    }
 
-        return view('login/empleadosView');
+    public function validacionLogin(Request $request) {
+        
+        $datos = request()->validate([
+            'usuario' => 'required',
+            'clave' => 'required'
+        ]);
+        
+        $credencials = request()->only('usuario', 'clave');
+
+        if (Auth::attempt($credencials)) {
+            
+            request()->session()->regenerate();
+
+            return redirect('/');
+        }
+
+        return redirect()->route('loginNuevo');
+
     }
 
     /**
@@ -28,7 +48,7 @@ class LoginController extends Controller
      */
     public function create()
     {
-        //
+        return view('login/empleadosView');
     }
 
     /**
@@ -114,7 +134,7 @@ class LoginController extends Controller
         ];
 
         $consulta_empleados = UsuarioModel::select('E.nombre','E.apellido', 'E.dui', 'E.cargo',
-        'U.usuario', 'U.estado');
+        'U.usuario', 'U.estado')-> where('');
 
     }
 
