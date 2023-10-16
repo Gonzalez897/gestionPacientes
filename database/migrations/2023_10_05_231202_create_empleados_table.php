@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('apellido');
             $table->string('dui');
             $table->string('cargo');
-            $table->string('nombre');
             $table->date('f_nacimiento');
             $table->timestamps();
         });

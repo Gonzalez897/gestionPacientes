@@ -18,11 +18,11 @@ return new class extends Migration
             $table->string('nombre_cita');
             $table->string('motivo');
             $table->date('fecha_cita');
-            $table->unsignedInteger('idPacientes');
+            $table->unsignedBigInteger('idPacientes');
             $table->unsignedBigInteger('idDoctores');
-            $table->foreign('pacientes_id')->references('idPacientes')->on('pacientes')->onDelete('cascade')
+            $table->foreign('idPacientes')->references('idPacientes')->on('pacientes')->onUpdate('cascade')->onDelete('cascade')
             ->onUpdate('cascade');
-            $table->foreign('doctores_id')->references('idDoctores')->on('doctores')->onDelete('cascade')
+            $table->foreign('idDoctores')->references('idDoctores')->on('doctores')->onDelete('cascade')
             ->onUpdate('cascade');
             $table->timestamps();
         });

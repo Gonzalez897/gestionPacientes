@@ -20,9 +20,9 @@ return new class extends Migration
             $table->date('f_consulta');
             $table->unsignedBigInteger('idPacientes');
             $table->unsignedBigInteger('idDoctores');
-            $table->foreign('pacientes_id')->references('idPacientes')->on('pacientes')->onDelete('cascade')
+            $table->foreign('idPacientes')->references('idPacientes')->on('pacientes')->onDelete('cascade')
             ->onUpdate('cascade');
-            $table->foreign('doctores_id')->references('idDoctores')->on('doctores')->onDelete('cascade')
+            $table->foreign('idDoctores')->references('idDoctores')->on('doctores')->onDelete('cascade')
             ->onUpdate('cascade');
             $table->timestamps();
         });

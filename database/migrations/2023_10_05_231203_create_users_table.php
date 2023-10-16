@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('estado');
             $table->unsignedBigInteger('idEmpleados');
-            $table->foreign('empleados_id')->references('idEmpleados')->on('empleados')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('idEmpleados')->references('idEmpleados')->on('empleados')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

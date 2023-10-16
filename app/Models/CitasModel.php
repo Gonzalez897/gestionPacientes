@@ -10,5 +10,5 @@ class CitasModel extends Model
     use HasFactory;
     protected $table= 'citas';
     protected $primaryKey='idCitas';
-    protected $fillable=['nombre_cita','motivo','fecha_cita'];
+    protected $fillable=['nombre_cita','motivo','fecha_cita','idPacientes','idDoctores'];
 }

@@ -46,6 +46,9 @@ class CitasController extends Controller
             'fecha_cita'=>'required'
         ]);
 
+        $data['idPacientes'] = 1;
+        $data['idDoctores'] = 3;
+
         CitasModel::create($data);
         return redirect('/vistas/Citas/citasCreate');
     }
