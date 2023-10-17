@@ -43,9 +43,5 @@ class InicioController extends Controller
         return view('vistas/loginView');
     }
 
-    public function consultaEmpleados() {
-        return view('vistas/consultaEmpleadosView');
-    }
-
 
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DoctorModel;
 use App\Models\EmpleadoModel;
-use App\Models\UsuarioModel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -48,7 +48,7 @@ class LoginController extends Controller
      */
     public function create()
     {
-        return view('login/empleadosView');
+        return view('vistas/Empleados/ingresoEmpleados');
     }
 
     /**
@@ -82,7 +82,7 @@ class LoginController extends Controller
 
         $empleado_ingresado = EmpleadoModel::latest()->first();
 
-        $consulta_superusuarios = UsuarioModel::select('estado')->where('estado','superusuario')->get();
+        $consulta_superusuarios = User::select('estado')->where('estado','superusuario')->get();
 
         $usuarios = [];
 
@@ -95,7 +95,7 @@ class LoginController extends Controller
                 'idEmpleados' => $empleado_ingresado->idEmpleados
             ];
 
-            UsuarioModel::create($usuarios);
+            User::create($usuarios);
         }else{
 
             $usuarios = [
@@ -105,7 +105,7 @@ class LoginController extends Controller
                 'idEmpleados' => $empleado_ingresado->idEmpleados
             ];
 
-            UsuarioModel::create($usuarios);
+            User::create($usuarios);
         }
 
         $doctores = [];
@@ -126,15 +126,7 @@ class LoginController extends Controller
 
     public function consultaEmpleados(Request $request){
 
-        $consultaDatos = [
-            'nombre' => $request->input('nombre'),
-            'apellido' => $request->input('apellido'),
-            'dui' => $request->input('dui'),
-            'cargo' => $request->input('cargo')
-        ];
-
-        $consulta_empleados = UsuarioModel::select('E.nombre','E.apellido', 'E.dui', 'E.cargo',
-        'U.usuario', 'U.estado')-> where('');
+        return view('vistas/Empleados/consultaEmpleadosView');
 
     }
 
