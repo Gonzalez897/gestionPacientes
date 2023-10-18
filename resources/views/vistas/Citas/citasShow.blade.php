@@ -33,30 +33,40 @@
         <b>Cosulta de citas</b>
     </h2>
 
-    <table class="table table-dark" id="tablaCitas">
+    <table id="tablaCitas" class="table table-hover table-bordered table-dark table-striped mt-2">
         <thead>
-            <th>Hola</th>
-            <th>Como</th>
-            <th>Estas?</th>
-        </thead>
-        <tbody>
-            <tr>
-                <td><br></td>
-                <td><br></td>
-                <td><br></td>
-            </tr>
-            <tr>
-                <td><br></td>
-                <td><br></td>
-                <td><br></td>
-            </tr>
-            <tr>
-                <td><br></td>
-                <td><br></td>
-                <td><br></td>
-            </tr>
-        </tbody>
+        <tr>
+            <td>Id </td>
+            <td>Nombre de la cita</td>
+            <td>Motivo de la cita</td>
+            <td>Fecha de la cita</td>
+            <td>ID PACIENTE</td>
+            <td>ID DOCTORES</td>
+            <td>Fecha de creacion</td>
+            <td>Acciones</td>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach ($citas as $item)
+    <tr>
+        <td>{{$item->idCitas}}</td>
+        <td>{{$item->nombre_cita}}</td>
+        <td>{{$item->motivo}}</td>
+        <td>{{$item->fecha_cita}}</td>
+        <td>{{$item->idPacientes}}</td>
+        <td>{{$item->idDoctores}}</td>
+        <td>{{$item->created_at}}</td>
+        <td>
+            <a href="/vistas/Citas/citasEdit/{{$item->idCitas}}" class="btn btn-danger btn-sm">Modificar</a>
+            <button class="btn btn-danger btn-sm" url="/vistas/Citas/citasDestroy/{{$item->idCitas}}" onclick="eliminar(this)" token="{{ csrf_token() }}">Eliminar</button>
+        </td>
+    </tr>  
+    @endforeach
+    </tbody>
     </table>
     
-
+@endsection
+@section('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('js/eliminar.js') }}"></script>
 @endsection

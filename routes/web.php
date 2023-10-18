@@ -38,9 +38,9 @@ Route::get('/citasUpdate', [InicioController::class, 'citasUpdate'])->name('cita
 Route::get('/vistas/Citas/citasShow', [CitasController::class,'index']);
 Route::get('/vistas/Citas/citasCreate', [CitasController::class,'create']);
 Route::post('/vistas/Citas/citasStore', [CitasController::class,'store']);
-// Route::get('/tareas/edit/{tareas}', [TareaController::class,'edit']);
-// Route::put('/tareas/update/{tareas}', [TareaController::class,'update']);
-// Route::delete('/tareas/destroy/{tareas}',[TareaController::class, 'destroy']);
+Route::get('/vistas/Citas/citasEdit/{citas}', [CitasController::class,'edit']);
+Route::put('/vistas/Citas/citasUpdate/{citas}', [CitasController::class,'update']);
+Route::delete('/vistas/Citas/citasDestroy/{citas}',[CitasController::class, 'destroy']);
 
 
 

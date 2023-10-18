@@ -92,5 +92,6 @@
     </nav>
     <br>
     @yield('contenido')
+    @yield('scripts')
 </body>
 </html>

@@ -50,7 +50,7 @@ class CitasController extends Controller
         $data['idDoctores'] = 3;
 
         CitasModel::create($data);
-        return redirect('/vistas/Citas/citasCreate');
+        return redirect('/vistas/Citas/citasShow');
     }
 
     /**
@@ -70,9 +70,9 @@ class CitasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(CitasModel $citas )
     {
-        //
+        return view('/vistas/Citas/citasUpdate/')->with(['citas'=>$citas]);
     }
 
     /**
@@ -82,9 +82,21 @@ class CitasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, CitasModel $citas)
     {
-        //
+        $data=request()->validate([
+            'nombre_cita'=>'required',
+            'motivo'=>'required',
+            'fecha_cita'=>'required',
+        ]);
+
+        $citas->nombres_citas=$data['nombres_citas'];
+        $citas->motivo=$data['motivo'];
+        $citas->fecha_cita=$data['fecha_cita'];
+        $citas->updated_at=now();
+        $citas->save();
+
+        return redirect('/vistas/Citas/citasShow');
     }
 
     /**
@@ -95,6 +107,7 @@ class CitasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        CitasModel::destroy($id);
+        return response()->json(array('res'=>true));
     }
 }
