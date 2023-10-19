@@ -29,11 +29,6 @@ Route::get('/consultas', [InicioController::class, 'consultas'])->name('consulta
 
 Route::get('/doctores', [InicioController::class, 'doctores'])->name('doctores');
 
-// CITAS RUTAS SIN CRUD
-Route::get('/citasCreate', [InicioController::class, 'citasCreate'])->name('citas');
-Route::get('/citasShow', [InicioController::class, 'citasShow'])->name('citas');
-Route::get('/citasUpdate', [InicioController::class, 'citasUpdate'])->name('citas');
-
 // CITAS RUTAS CON CRUD
 Route::get('/vistas/Citas/citasShow', [CitasController::class,'index']);
 Route::get('/vistas/Citas/citasCreate', [CitasController::class,'create']);

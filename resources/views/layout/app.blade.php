@@ -65,9 +65,8 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown"><span class="links">citas</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/citasCreate">Crear Citas</a></li>
-                    <li><a class="dropdown-item" href="/citasShow">Ver Citas Creadas</a></li>
-                    <li><a class="dropdown-item" href="/citasUpdate">Actualizar Citas Creadas</a></li>
+                    <li><a class="dropdown-item" href="/vistas/Citas/citasCreate">Crear Citas</a></li>
+                    <li><a class="dropdown-item" href="/vistas/Citas/citasShow">Ver Citas Creadas</a></li>
                 </ul>
             </li>
 

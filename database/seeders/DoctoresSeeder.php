@@ -18,19 +18,19 @@ class DoctoresSeeder extends Seeder
     {
         $doctores = [
             [
-                'idEmpleados' => '3',
+                'idEmpleados' => '1',
                 'especializacion' => 'General',
                 'created_at' => Carbon::now()
             ],
 
             [
-                'idEmpleados' => '4',
+                'idEmpleados' => '2',
                 'especializacion' => 'Nutricionista',
                 'created_at' => Carbon::now()
             ],
 
             [
-                'idEmpleados' => '5',
+                'idEmpleados' => '3',
                 'especializacion' => 'Oftalmologo',
                 'created_at' => Carbon::now()
             ]

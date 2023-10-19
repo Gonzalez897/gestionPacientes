@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\CitasModel;
+use App\Models\DoctorModel;
 use Illuminate\Http\Request;
+use App\Models\PacientesModel;
 
 class CitasController extends Controller
 {
@@ -16,7 +18,6 @@ class CitasController extends Controller
     {
         //
         $citas=CitasModel::all();
-
         return view('/vistas/Citas/citasShow')->with(['citas'=>$citas]);
     }
 
@@ -28,7 +29,10 @@ class CitasController extends Controller
     public function create()
     {
         //
-        return view('/vistas/Citas/citasCreate');
+        $pacientes=PacientesModel::all();
+        $doctores=DoctorModel::select('doctores.especializacion','doctores.idDoctores', 'empleados.nombre')
+        ->from('doctores')->join('empleados','empleados.idEmpleados','=','doctores.idEmpleados')->get();
+        return view('/vistas/Citas/citasCreate')->with(['pacientes'=>$pacientes,'doctores'=>$doctores]);
     }
 
     /**
@@ -40,14 +44,21 @@ class CitasController extends Controller
     public function store(Request $request)
     {
         //
-        $data=request()->validate([
+        $datos=request()->validate([
             'nombre_cita'=>'required',
             'motivo'=>'required',
-            'fecha_cita'=>'required'
+            'fecha_cita'=>'required',
+            'fkPaciente'=>'required',
+            'fkDoctores'=>'required'
         ]);
 
-        $data['idPacientes'] = 1;
-        $data['idDoctores'] = 3;
+        $data=[
+            'nombre_cita'=>$datos['nombre_cita'],
+            'motivo'=>$datos['motivo'],
+            'fecha_cita'=>$datos['fecha_cita'],
+            'idPacientes'=>$datos['fkPaciente'],
+            'idDoctores'=>$datos['fkDoctores']
+        ];
 
         CitasModel::create($data);
         return redirect('/vistas/Citas/citasShow');
@@ -72,7 +83,7 @@ class CitasController extends Controller
      */
     public function edit(CitasModel $citas )
     {
-        return view('/vistas/Citas/citasUpdate/')->with(['citas'=>$citas]);
+        return view('/vistas/Citas/citasUpdate')->with(['citas'=>$citas]);
     }
 
     /**

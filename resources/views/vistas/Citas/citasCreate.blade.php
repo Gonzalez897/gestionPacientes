@@ -43,21 +43,62 @@
                 @csrf
                 <div class="col-md-4">
                       <label class="form-label"><b>Nombre Cita</b></label>
-                      <input type="text" class="form-control" name="nombre_cita" value="" required>
+                      <input type="text" class="form-control" name="nombre_cita" value="{{old('nombre_cita')}}">
                 </div>
         
                 <div class="col-md-4">
                       <label class="form-label"><b>Motivo</b></label>
-                      <input type="text-tarea" class="form-control" name="motivo" value="" required placeholder="Digite el motivo">
+                      <input type="text-tarea" class="form-control" name="motivo" value="{{old('motivo')}}" placeholder="Digite el motivo">
                 </div>
                     
                     <div class="col-md-4">
                       <label class="form-label"><b>Fecha de la cita</b></label>
                       <div class="input-group has-validation">
-                        <input type="date" class="form-control" name="fecha_cita" required>
+                        <input type="date" class="form-control" name="fecha_cita" value="{{old('fecha_cita')}}">
                       </div>
                     </div>
-        
+
+                    <div class="col-12">
+                        Paciente:
+                        <br>
+                        <select name="fkPaciente" class="form-control">
+                            <option value="">~</option>
+                            @foreach ($pacientes as $valor)
+                            @if (old('fkPaciente')==$valor->idPacientes)
+                            <option selected value="{{ $valor->idPacientes }}">{{ $valor->nombre_paciente }}</option>
+                            @else
+                            <option value="{{ $valor->idPacientes }}">{{ $valor->nombre_paciente }}</option>
+                            @endif
+                            @endforeach
+                        </select>
+                        @error('fkPaciente')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    </div>
+                    
+                    
+                        <div class="col-12">
+                            Doctores:
+                            <br>
+                            <select name="fkDoctores" class="form-control">
+                                <option value="">~</option>
+                                @foreach ($doctores as $valor)
+                                @if (old('fkDoctores')==$valor->idDoctores)
+                                <option selected value="{{ $valor->idDoctores }}">{{ $valor->nombre }}</option>
+                                @else
+                                <option value="{{ $valor->idDoctores }}">{{ $valor->nombre }}</option>
+                                @endif
+                                @endforeach
+                            </select>
+                            @error('fkDoctores')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        </div>
+
                     <div class="col-12">
                       <button class="btn btn-primary" type="submit">Ingresar cita</button>
                     </div>
