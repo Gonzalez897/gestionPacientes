@@ -17,7 +17,12 @@ class CitasController extends Controller
     public function index()
     {
         //
-        $citas=CitasModel::all();
+        $citas=CitasModel::select('citas.idCitas','citas.nombre_cita', 'citas.motivo', 'citas.fecha_cita', 'pacientes.nombre_paciente as NombreP' , 'pacientes.apellido_paciene as ApellidoP', 'empleados.nombre as Doctor','empleados.apellido as DoctorA','doctores.especializacion as Especializacion', 'citas.created_at')
+        ->from('citas')->join('pacientes','citas.idPacientes','=','pacientes.idPacientes')
+        ->join('doctores','citas.idDoctores','=','doctores.idDoctores')
+        ->join('empleados','doctores.idEmpleados','=','empleados.idEmpleados')
+        ->where('empleados.cargo','=','doctor')
+        ->get();
         return view('/vistas/Citas/citasShow')->with(['citas'=>$citas]);
     }
 
@@ -83,7 +88,17 @@ class CitasController extends Controller
      */
     public function edit(CitasModel $citas )
     {
-        return view('/vistas/Citas/citasUpdate')->with(['citas'=>$citas]);
+        $pacientes=PacientesModel::select('*')
+        ->from('pacientes')
+        ->where('idPacientes',$citas->idPacientes)
+        ->get();
+        $doctores=DoctorModel::select('doctores.especializacion','doctores.idDoctores','empleados.nombre')
+        ->from('doctores')->join('empleados','empleados.idEmpleados','=','doctores.idEmpleados')
+        ->get();
+
+        
+
+        return view('/vistas/Citas/citasUpdate')->with(['citas'=>$citas,'pacientes'=>$pacientes,'doctores'=>$doctores]);
     }
 
     /**
@@ -99,11 +114,13 @@ class CitasController extends Controller
             'nombre_cita'=>'required',
             'motivo'=>'required',
             'fecha_cita'=>'required',
+            'fkDoctores'=>'required'
         ]);
 
-        $citas->nombres_citas=$data['nombres_citas'];
+        $citas->nombre_cita=$data['nombre_cita'];
         $citas->motivo=$data['motivo'];
         $citas->fecha_cita=$data['fecha_cita'];
+        $citas->idDoctores=$data['fkDoctores'];
         $citas->updated_at=now();
         $citas->save();
 

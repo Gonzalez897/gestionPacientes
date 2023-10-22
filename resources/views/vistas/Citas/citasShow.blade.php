@@ -36,12 +36,13 @@
     <table id="tablaCitas" class="table table-hover table-bordered table-dark table-striped mt-2">
         <thead>
         <tr>
-            <td>Id </td>
+            <td>ID</td>
             <td>Nombre de la cita</td>
             <td>Motivo de la cita</td>
             <td>Fecha de la cita</td>
-            <td>ID PACIENTE</td>
-            <td>ID DOCTORES</td>
+            <td>Nombre Paciente</td>
+            <td>Nombre Doctor</td>
+            <td>Especializacion</td>
             <td>Fecha de creacion</td>
             <td>Acciones</td>
         </tr>
@@ -53,8 +54,9 @@
         <td>{{$item->nombre_cita}}</td>
         <td>{{$item->motivo}}</td>
         <td>{{$item->fecha_cita}}</td>
-        <td>{{$item->idPacientes}}</td>
-        <td>{{$item->idDoctores}}</td>
+        <td>{{$item->NombreP}} {{$item->ApellidoP}}</td>
+        <td>{{$item->Doctor}} {{$item->DoctorA}}</td>
+        <td>{{$item->Especializacion}}</td>
         <td>{{$item->created_at}}</td>
         <td>
             <a href="/vistas/Citas/citasEdit/{{$item->idCitas}}" class="btn btn-danger btn-sm">Modificar</a>
