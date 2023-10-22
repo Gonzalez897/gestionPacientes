@@ -34,7 +34,7 @@
                         <br>
                         <span>Constraseña</span>
                         <br>
-                        <input class="form-control" type="password" name="clave" value="{{ old('clave') }}">
+                        <input class="form-control" type="password" name="clave" value="{{ old('clave') }}" maxlength="8">
                         @error('clave')
                             <span class="invalid-feedback d-block" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -43,7 +43,7 @@
                         <br>
                         <span>Confirmar Contraseña</span>
                         <br>
-                        <input class="form-control" type="password" name="conf_clave" value="{{ old('conf_clave') }}">
+                        <input class="form-control" type="password" name="conf_clave" value="{{ old('conf_clave') }}" maxlength="8">
                         @error('conf_clave')
                             <span class="invalid-feedback d-block" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -51,34 +51,6 @@
                         @enderror
                     </div>
                     <div class="col-3">
-                        <span>Estado del usuario</span>
-                        <br>
-                        <select name="estado_usuario" id="" class="form-control">
-                            <option value="">~</option>
-                            @if (old('estado_usuario') === 'Secretaria')
-                                <option value="Secretaria" selected>Secretaria</option>
-                                <option value="Doctor">Doctor</option>
-                                <option value="Empleado">Empleado</option>
-                            @elseif (old('estado_usuario') === 'Doctor')
-                                <option value="Secretaria">Secretaria</option>
-                                <option value="Doctor" selected>Doctor</option>
-                                <option value="Empleado">Empleado</option>
-                            @elseif (old('estado_usuario') === 'Empleado')
-                                <option value="Secretaria">Secretaria</option>
-                                <option value="Doctor">Doctor</option>
-                                <option value="Empleado" selected>Empleado</option>
-                            @else
-                                <option value="Secretaria">Secretaria</option>
-                                <option value="Doctor">Doctor</option>
-                                <option value="Empleado">Empleado</option>
-                            @endif
-                        </select>
-                        @error('estado_usuario')
-                            <span class="invalid-feedback d-block" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                        <br>
                         <span>Nombre del empleado</span>
                         <br>
                         <input class="form-control" type="text" name="nombre_empleado"

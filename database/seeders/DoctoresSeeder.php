@@ -20,18 +20,21 @@ class DoctoresSeeder extends Seeder
             [
                 'idEmpleados' => '5',
                 'especializacion' => 'General',
+                'disponibilidad' => 'Disponible',
                 'created_at' => Carbon::now()
             ],
 
             [
                 'idEmpleados' => '6',
                 'especializacion' => 'Nutricionista',
+                'disponibilidad' => 'No disponible',
                 'created_at' => Carbon::now()
             ],
 
             [
                 'idEmpleados' => '7',
                 'especializacion' => 'Oftalmologo',
+                'disponibilidad' => 'Disponible',
                 'created_at' => Carbon::now()
             ]
         ];

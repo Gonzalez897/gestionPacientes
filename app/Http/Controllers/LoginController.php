@@ -42,7 +42,6 @@ class LoginController extends Controller
         $datos = request()->validate([
             'usuario' => 'required',
             'clave' => 'required|min:8',
-            'estado_usuario' => 'required',
             'email' => 'required|email|max:255|unique:users',
             'conf_clave' => 'required|same:clave',
             'nombre_empleado' => 'required',
@@ -98,7 +97,8 @@ class LoginController extends Controller
             
             $doctores = [
                 'idEmpleados' => $empleado_ingresado->idEmpleados,
-                'especializacion' => $request->input('especialidad')
+                'especializacion' => $request->input('especialidad'),
+                'disponibilidad' => "Disponible"
             ];
 
             DoctorModel::create($doctores);

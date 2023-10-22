@@ -29,31 +29,26 @@ Route::put('/empleado/update/{empleado}', [LoginController::class, 'update'])->n
 
 Route::get('/', [InicioController::class,'inicio'])->middleware('auth');
 
-Route::get('/consultas', [InicioController::class, 'consultas'])->name('consultas');
+Route::get('/consultas', [InicioController::class, 'consultas'])->name('consultas')->middleware('auth');
 
-Route::get('/doctores', [InicioController::class, 'doctores'])->name('doctores');
+Route::get('/doctores', [InicioController::class, 'doctores'])->name('doctores')->middleware('auth');
 
 // CITAS RUTAS CON CRUD
-Route::get('/vistas/Citas/citasShow', [CitasController::class,'index']);
-Route::get('/vistas/Citas/citasCreate', [CitasController::class,'create']);
-Route::post('/vistas/Citas/citasStore', [CitasController::class,'store']);
-Route::get('/vistas/Citas/citasEdit/{citas}', [CitasController::class,'edit']);
-Route::put('/vistas/Citas/citasUpdate/{citas}', [CitasController::class,'update']);
-Route::delete('/vistas/Citas/citasDestroy/{citas}',[CitasController::class, 'destroy']);
+Route::get('/vistas/Citas/citasShow', [CitasController::class,'index'])->middleware('auth');
+Route::get('/vistas/Citas/citasCreate', [CitasController::class,'create'])->middleware('auth');
+Route::post('/vistas/Citas/citasStore', [CitasController::class,'store'])->middleware('auth');
+Route::get('/vistas/Citas/citasEdit/{citas}', [CitasController::class,'edit'])->middleware('auth');
+Route::put('/vistas/Citas/citasUpdate/{citas}', [CitasController::class,'update'])->middleware('auth');
+Route::delete('/vistas/Citas/citasDestroy/{citas}',[CitasController::class, 'destroy'])->middleware('auth');
 
 
 
-Route::get('/recetas', [InicioController::class, 'recetas'])->name('recetas');
+Route::get('/recetas', [InicioController::class, 'recetas'])->name('recetas')->middleware('auth');
 
-Route::get('/Pacientes', [InicioController::class, 'Pacientes'])->name('Pacientes');
+Route::get('/Pacientes', [InicioController::class, 'Pacientes'])->name('Pacientes')->middleware('auth');
 
-Route::get('/consultaEmpleados', [LoginController::class, 'consultaEmpleados'])->name('ConsultaEmpleados');
+Route::get('/consultaEmpleados', [LoginController::class, 'consultaEmpleados'])->name('ConsultaEmpleados')->middleware('auth');
 
-
-//Route::get('/login', [LoginController::class, 'index'])->name('loginNuevo');
-
-Route::post('/loginValidar', [LoginController::class, 'validacionLogin'])->name('validarUsuario');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

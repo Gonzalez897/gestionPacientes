@@ -53,9 +53,12 @@
         </a>
 
         <!-- Links -->
-        @guest
-        @else
-            <ul class="navbar-nav">
+        <ul class="navbar-nav">
+            @guest
+                <li class="nav-item">
+                    <a class="nav-link" href="/formEmpleado"><span class="links">Ingreso de empleados</span></a>
+                </li>
+            @else
                 <li class="nav-item">
                     <a class="nav-link" href="/"><span class="links">Inicio</span></a>
                 </li>
@@ -66,13 +69,14 @@
                     <a class="nav-link" href="/doctores"><span class="links">Doctores</span></a>
                 </li>
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown"><span class="links">citas</span></a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/vistas/Citas/citasCreate">Crear Citas</a></li>
-                    <li><a class="dropdown-item" href="/vistas/Citas/citasShow">Ver Citas Creadas</a></li>
-                </ul>
-            </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                        data-bs-toggle="dropdown"><span class="links">citas</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/vistas/Citas/citasCreate">Crear Citas</a></li>
+                        <li><a class="dropdown-item" href="/vistas/Citas/citasShow">Ver Citas Creadas</a></li>
+                    </ul>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="/recetas"><span class="links">recetas</span></a>
@@ -110,8 +114,8 @@
                         </form>
                     </div>
                 </li>
-            </ul>
-        @endguest
+            @endguest
+        </ul>
     </nav>
     <br>
     @yield('contenido')

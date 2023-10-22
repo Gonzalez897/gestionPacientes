@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('idEmpleados');
             $table->foreign('idEmpleados')->references('idEmpleados')->on('empleados')->onDelete('cascade')-> onUpdate('cascade');
             $table->string('especializacion');
+            $table->string('disponibilidad');
             $table->timestamps();
         });
     }
