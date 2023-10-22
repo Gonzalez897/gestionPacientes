@@ -21,26 +21,6 @@ class LoginController extends Controller
         return view('vistas/loginView');
     }
 
-    public function validacionLogin(Request $request) {
-        
-        $datos = request()->validate([
-            'usuario' => 'required',
-            'clave' => 'required'
-        ]);
-        
-        $credencials = request()->only('usuario', 'clave');
-
-        if (Auth::attempt($credencials)) {
-            
-            request()->session()->regenerate();
-
-            return redirect('/');
-        }
-
-        return redirect()->route('loginNuevo');
-
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -61,7 +41,9 @@ class LoginController extends Controller
     {
         $datos = request()->validate([
             'usuario' => 'required',
-            'clave' => 'required',
+            'clave' => 'required|min:8',
+            'estado_usuario' => 'required',
+            'email' => 'required|email|max:255|unique:users',
             'conf_clave' => 'required|same:clave',
             'nombre_empleado' => 'required',
             'apellido_empleado' => 'required',
@@ -75,7 +57,7 @@ class LoginController extends Controller
             'apellido' => $datos['apellido_empleado'],
             'dui' => $datos['dui_empleado'],
             'cargo' => $datos['cargo_empleado'],
-            'fecha_nacimiento' => $datos['fecha_nacimiento'],
+            'f_nacimiento' => $datos['fecha_nacimiento'],
         ];
 
         EmpleadoModel::create($empleados);
@@ -89,9 +71,10 @@ class LoginController extends Controller
         if (count($consulta_superusuarios) == 0) {
             
             $usuarios = [
-                'usuario' => $datos['usuario'],
-                'clave' => Hash::make($datos['clave']),
+                'name' => $datos['usuario'],
+                'password' => Hash::make($datos['clave']),
                 'estado' => 'superusuario',
+                'email' => $datos['email'],
                 'idEmpleados' => $empleado_ingresado->idEmpleados
             ];
 
@@ -99,9 +82,10 @@ class LoginController extends Controller
         }else{
 
             $usuarios = [
-                'usuario' => $datos['usuario'],
-                'clave' => Hash::make($datos['clave']),
+                'name' => $datos['usuario'],
+                'password' => Hash::make($datos['clave']),
                 'estado' => 'empleado',
+                'email' => $datos['email'],
                 'idEmpleados' => $empleado_ingresado->idEmpleados
             ];
 
@@ -121,12 +105,17 @@ class LoginController extends Controller
             
         }
 
-        return redirect('/formEmpleado');
+        return redirect('/');
     }
 
     public function consultaEmpleados(Request $request){
+        
+        $empleados = EmpleadoModel::select('empleados.idEmpleados','empleados.nombre','empleados.apellido', 'users.name',
+        'empleados.dui', 'empleados.cargo', 'empleados.f_nacimiento')
+        ->join('users', 'users.idEmpleados', '=', 'empleados.idEmpleados')
+        ->get();
 
-        return view('vistas/Empleados/consultaEmpleadosView');
+        return view('vistas/Empleados/consultaEmpleadosView', compact('empleados'));
 
     }
 
@@ -147,9 +136,11 @@ class LoginController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function empleadosEdit(EmpleadoModel $empleado)
     {
-        //
+        $id = $empleado->idEmpleados;
+        
+        return view('vistas/Empleados/formUpdateEmpleados', compact('empleado','id'));
     }
 
     /**

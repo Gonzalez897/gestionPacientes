@@ -1,22 +1,27 @@
 @extends('layout.app')
 
-@section('titulo', 'Ingreso Empleados')
+@section('titulo', 'Actualizar Empleados')
 
 @section('contenido')
-    <form action="{{ route('ingresoEmpleados') }}" method="POST" autocomplete="off">
+    <form action="{{ route('actualizarEmpleado', ['empleado' => $empleado->idEmpleados]) }}" method="POST" autocomplete="off">
+        @method('PUT')
         @csrf
         <div class="container">
             <div class="card bg-muted">
                 <div class="card-header">
                     <h2 class="text-center text-dark mt-2">
-                        Ingreso de Empleados
+                        Actualizar de Empleados
                     </h2>
                 </div>
                 <div class="card-body row justify-content-center">
                     <div class="col-3">
-                        <span>Nombre usuarios</span>
+                        <span>Nombre usuarios {{ $id }}</span>
                         <br>
-                        <input class="form-control" type="text" name="usuario" value="{{ old('usuario') }}">
+                        @if (old('usuario'))
+                            <input class="form-control" type="text" name="usuarioUpdate" value="{{ old('usuario') }}">
+                            @else
+                            <input class="form-control" type="text" name="usuarioUpdate" value="{{ $empleado->nombre }}">
+                        @endif
                         @error('usuario')
                             <span class="invalid-feedback d-block" role="alert">
                                 <strong>{{ $message }}</strong>

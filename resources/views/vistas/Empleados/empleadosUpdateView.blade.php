@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('titulo', 'Ingreso Empleados')
+@section('titulo', 'Modificacion del Empleados')
 
 @section('contenido')
     <form action="{{ route('ingresoEmpleados') }}" method="POST" autocomplete="off">
