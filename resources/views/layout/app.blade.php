@@ -84,9 +84,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/Pacientes"><span class="links">Pacientes</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login"><span class="links">login</span></a>
-                </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-light" href="#" role="button"
