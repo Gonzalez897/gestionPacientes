@@ -23,7 +23,11 @@ Route::get('/formEmpleado', [LoginController::class, 'create']);
 
 Route::post('/ingresoEmpleados', [LoginController::class, 'store'])->name('ingresoEmpleados');
 
-Route::get('/', [InicioController::class,'inicio']);
+Route::get('/empleado/edit/{empleado}', [LoginController::class, 'empleadosEdit'])->middleware('auth');
+
+Route::put('/empleado/update/{empleado}', [LoginController::class, 'update'])->name('actualizarEmpleado')->middleware('auth');
+
+Route::get('/', [InicioController::class,'inicio'])->middleware('auth');
 
 Route::get('/consultas', [InicioController::class, 'consultas'])->name('consultas');
 
@@ -43,9 +47,13 @@ Route::get('/recetas', [InicioController::class, 'recetas'])->name('recetas');
 
 Route::get('/Pacientes', [InicioController::class, 'Pacientes'])->name('Pacientes');
 
-Route::get('/consultaEmpleados', [InicioController::class, 'consultaEmpleados'])->name('ConsultaEmpleados');
+Route::get('/consultaEmpleados', [LoginController::class, 'consultaEmpleados'])->name('ConsultaEmpleados');
 
 
-Route::get('/login', [LoginController::class, 'index'])->name('loginNuevo');
+//Route::get('/login', [LoginController::class, 'index'])->name('loginNuevo');
 
 Route::post('/loginValidar', [LoginController::class, 'validacionLogin'])->name('validarUsuario');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

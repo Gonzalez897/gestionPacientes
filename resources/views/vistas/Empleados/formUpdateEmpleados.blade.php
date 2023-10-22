@@ -1,0 +1,179 @@
+@extends('layout.app')
+
+@section('titulo', 'Actualizar Empleados')
+
+@section('contenido')
+    <form action="{{ route('actualizarEmpleado', ['empleado' => $empleado->idEmpleados]) }}" method="POST" autocomplete="off">
+        @method('PUT')
+        @csrf
+        <div class="container">
+            <div class="card bg-muted">
+                <div class="card-header">
+                    <h2 class="text-center text-dark mt-2">
+                        Actualizar de Empleados
+                    </h2>
+                </div>
+                <div class="card-body row justify-content-center">
+                    <div class="col-3">
+                        <span>Nombre usuarios {{ $id }}</span>
+                        <br>
+                        @if (old('usuario'))
+                            <input class="form-control" type="text" name="usuarioUpdate" value="{{ old('usuario') }}">
+                            @else
+                            <input class="form-control" type="text" name="usuarioUpdate" value="{{ $empleado->nombre }}">
+                        @endif
+                        @error('usuario')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <br>
+                        <span>Correo Electronico</span>
+                        <br>
+                        <input class="form-control" type="email" name="email" value="{{ old('email') }}">
+                        @error('email')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <br>
+                        <span>Constraseña</span>
+                        <br>
+                        <input class="form-control" type="password" name="clave" value="{{ old('clave') }}">
+                        @error('clave')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <br>
+                        <span>Confirmar Contraseña</span>
+                        <br>
+                        <input class="form-control" type="password" name="conf_clave" value="{{ old('conf_clave') }}">
+                        @error('conf_clave')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-3">
+                        <span>Estado del usuario</span>
+                        <br>
+                        <select name="estado_usuario" id="" class="form-control">
+                            <option value="">~</option>
+                            @if (old('estado_usuario') === 'Secretaria')
+                                <option value="Secretaria" selected>Secretaria</option>
+                                <option value="Doctor">Doctor</option>
+                                <option value="Empleado">Empleado</option>
+                            @elseif (old('estado_usuario') === 'Doctor')
+                                <option value="Secretaria">Secretaria</option>
+                                <option value="Doctor" selected>Doctor</option>
+                                <option value="Empleado">Empleado</option>
+                            @elseif (old('estado_usuario') === 'Empleado')
+                                <option value="Secretaria">Secretaria</option>
+                                <option value="Doctor">Doctor</option>
+                                <option value="Empleado" selected>Empleado</option>
+                            @else
+                                <option value="Secretaria">Secretaria</option>
+                                <option value="Doctor">Doctor</option>
+                                <option value="Empleado">Empleado</option>
+                            @endif
+                        </select>
+                        @error('estado_usuario')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <br>
+                        <span>Nombre del empleado</span>
+                        <br>
+                        <input class="form-control" type="text" name="nombre_empleado"
+                            value="{{ old('nombre_empleado') }}">
+                        @error('nombre_empleado')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <br>
+                        <span>Apellido del empleado</span>
+                        <br>
+                        <input class="form-control" type="text" name="apellido_empleado"
+                            value="{{ old('apellido_empleado') }}">
+                        @error('apellido_empleado')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <br>
+                        <span>Dui del empleado</span>
+                        <br>
+                        <input class="form-control" type="text" name="dui_empleado" value="{{ old('dui_empleado') }}">
+                        @error('dui_empleado')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-4">
+                        <span>Cargo del empleado</span>
+                        <br>
+                        <select class="form-control" name="cargo_empleado" id="">
+                            @if (old('cargo_empleado') == 'Empleado')
+                                <option value="">~</option>
+                                <option value="Empleado" selected>Empleado</option>
+                                <option value="Secretaria">Secretaria</option>
+                                <option value="Doctor">Doctor</option>
+                            @endif
+                            @if (old('cargo_empleado') == 'Secretaria')
+                                <option value="">~</option>
+                                <option value="Empleado">Empleado</option>
+                                <option value="Secretaria" selected>Secretaria</option>
+                                <option value="Doctor">Doctor</option>
+                            @endif
+                            @if (old('cargo_empleado') == 'Doctor')
+                                <option value="">~</option>
+                                <option value="Empleado">Empleado</option>
+                                <option value="Secretaria">Secretaria</option>
+                                <option value="Doctor" selected>Doctor</option>
+                            @endif
+                            @if (!old('cargo_empleado'))
+                                <option value="">~</option>
+                                <option value="Empleado">Empleado</option>
+                                <option value="Secretaria">Secretaria</option>
+                                <option value="Doctor">Doctor</option>
+                            @endif
+                        </select>
+                        @error('cargo_empleado')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <br>
+                        <span>Fecha de nacimiento</span>
+                        <br>
+                        <input class="form-control" type="date" name="fecha_nacimiento" id=""
+                            value="{{ old('fecha_nacimiento') }}">
+                        @error('fecha_nacimiento')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <br>
+                        <span class="text-danger">si su cargo es doctor, ingrese su especialidad</span><br>
+                        <span class="h5">especialidad</span>
+                        <br>
+                        <input class="form-control" type="text" name="especialidad"
+                            value="{{ old('especialidad') }}">
+                        @error('especialidad')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    <input type="submit" value="Enviar Datos" class="btn btn-primary">
+                </div>
+            </div>
+        </div>
+    </form>
+@endsection

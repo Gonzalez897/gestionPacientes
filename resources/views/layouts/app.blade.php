@@ -13,41 +13,15 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
-    <style>
-        #div1 {
-            background-color: #def8f9;
-        }
-        
-        #barraNavegacion {
-            background-color: #2596be;
-            justify-content: left;
-        }
-
-        .links {
-            color: white;
-            padding: 15px;
-        }
-
-        .links:hover{
-            padding: 15px;
-            background-color: gray;
-            border-radius: 15px;
-        }
-    </style>
-
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<body style="background-color: #3140ac">
+<body>
     <div id="app">
-        <nav class="navbar navbar-expand-md" id="barraNavegacion">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="/" style="margin-left: 15px">
-                    <img src="{{ asset('imagenesSistema/imagenEmpresa3.jpg') }}" alt="logo" style="width: 60px;">
-                </a>
-
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <span class="text-light">{{ config('app.name', 'Laravel') }}</span>
+                    {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -65,13 +39,13 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}"><span class="links">{{ __('Login') }}</span></a>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}"><span class="links">{{ __('Register') }}</span></a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else

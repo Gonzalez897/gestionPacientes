@@ -11,5 +11,7 @@ class EmpleadoModel extends Model
 
     protected $table = 'empleados'; 
     protected $primaryKey = 'idEmpleados'; 
-    protected $fillable = ['nombre','apellido', 'dui', 'cargo', 'fecha_nacimiento']; 
+    protected $fillable = ['nombre','apellido', 'dui', 'cargo', 'f_nacimiento'];
+
+    
 }
