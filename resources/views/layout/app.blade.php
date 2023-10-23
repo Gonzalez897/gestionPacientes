@@ -81,8 +81,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/recetas"><span class="links">recetas</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Pacientes"><span class="links">Pacientes</span></a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                        data-bs-toggle="dropdown"><span class="links">Pacientes</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/vistas/Pacientes/pacientesCreate">Ingresar Pacientes</a></li>
+                        <li><a class="dropdown-item" href="/vistas/Pacientes/pacientesShow">Ver Pacientes Ingresados</a></li>
+                    </ul>
                 </li>
 
                 <li class="nav-item dropdown">

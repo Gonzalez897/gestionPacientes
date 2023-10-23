@@ -11,5 +11,5 @@ class PacientesModel extends Model
 
     protected $table = 'pacientes'; 
     protected $primaryKey = 'idPacientes'; 
-    protected $fillable = ['nombre_paciente','apellido_paciene', 'dui_paciente', 'edad']; 
+    protected $fillable = ['nombre_paciente','apellido_paciene', 'dui_paciente', 'edad_paciente']; 
 }

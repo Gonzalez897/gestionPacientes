@@ -17,7 +17,7 @@ class CitasController extends Controller
     public function index()
     {
         //
-        $citas=CitasModel::select('citas.idCitas','citas.nombre_cita', 'citas.motivo', 'citas.fecha_cita', 'pacientes.nombre_paciente as NombreP' , 'pacientes.apellido_paciene as ApellidoP', 'empleados.nombre as Doctor','empleados.apellido as DoctorA','doctores.especializacion as Especializacion', 'citas.created_at')
+        $citas=CitasModel::select('citas.idCitas','citas.motivo', 'citas.fecha_cita', 'pacientes.nombre_paciente as NombreP' , 'pacientes.apellido_paciene as ApellidoP', 'empleados.nombre as Doctor','empleados.apellido as DoctorA','doctores.especializacion as Especializacion', 'citas.created_at')
         ->from('citas')->join('pacientes','citas.idPacientes','=','pacientes.idPacientes')
         ->join('doctores','citas.idDoctores','=','doctores.idDoctores')
         ->join('empleados','doctores.idEmpleados','=','empleados.idEmpleados')
@@ -50,7 +50,6 @@ class CitasController extends Controller
     {
         //
         $datos=request()->validate([
-            'nombre_cita'=>'required',
             'motivo'=>'required',
             'fecha_cita'=>'required',
             'fkPaciente'=>'required',
@@ -58,7 +57,6 @@ class CitasController extends Controller
         ]);
 
         $data=[
-            'nombre_cita'=>$datos['nombre_cita'],
             'motivo'=>$datos['motivo'],
             'fecha_cita'=>$datos['fecha_cita'],
             'idPacientes'=>$datos['fkPaciente'],
@@ -111,13 +109,11 @@ class CitasController extends Controller
     public function update(Request $request, CitasModel $citas)
     {
         $data=request()->validate([
-            'nombre_cita'=>'required',
             'motivo'=>'required',
             'fecha_cita'=>'required',
             'fkDoctores'=>'required'
         ]);
 
-        $citas->nombre_cita=$data['nombre_cita'];
         $citas->motivo=$data['motivo'];
         $citas->fecha_cita=$data['fecha_cita'];
         $citas->idDoctores=$data['fkDoctores'];

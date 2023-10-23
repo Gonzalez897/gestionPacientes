@@ -42,11 +42,6 @@
                     @method('put')
                     @csrf
                     <div class="col-md-4">
-                        <label class="form-label"><b>Nombre Cita</b></label>
-                        <input type="text" class="form-control" name="nombre_cita" value="{{$citas->nombre_cita}}">
-                    </div>
-
-                    <div class="col-md-4">
                         <label class="form-label"><b>Motivo</b></label>
                         <input type="text-tarea" class="form-control" name="motivo" value="{{$citas->motivo}}"
                             placeholder="Digite el motivo">

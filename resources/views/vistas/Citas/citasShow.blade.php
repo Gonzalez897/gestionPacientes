@@ -37,7 +37,6 @@
         <thead>
         <tr>
             <td>ID</td>
-            <td>Nombre de la cita</td>
             <td>Motivo de la cita</td>
             <td>Fecha de la cita</td>
             <td>Nombre Paciente</td>
@@ -51,7 +50,6 @@
     @foreach ($citas as $item)
     <tr>
         <td>{{$item->idCitas}}</td>
-        <td>{{$item->nombre_cita}}</td>
         <td>{{$item->motivo}}</td>
         <td>{{$item->fecha_cita}}</td>
         <td>{{$item->NombreP}} {{$item->ApellidoP}}</td>

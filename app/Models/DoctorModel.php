@@ -11,5 +11,5 @@ class DoctorModel extends Model
 
     protected $table = 'doctores'; 
     protected $primaryKey = 'idDoctores'; 
-    protected $fillable = ['idEmpleados', 'especializacion']; 
+    protected $fillable = ['idEmpleados', 'especializacion', 'disponibilidad']; 
 }

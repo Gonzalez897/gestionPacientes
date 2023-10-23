@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CitasController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\PacientesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,7 +46,15 @@ Route::delete('/vistas/Citas/citasDestroy/{citas}',[CitasController::class, 'des
 
 Route::get('/recetas', [InicioController::class, 'recetas'])->name('recetas')->middleware('auth');
 
-Route::get('/Pacientes', [InicioController::class, 'Pacientes'])->name('Pacientes')->middleware('auth');
+// Pacientes CRUD
+Route::get('/vistas/Pacientes/pacientesShow', [PacientesController::class,'index'])->middleware('auth');
+Route::get('/vistas/Pacientes/pacientesCreate', [PacientesController::class,'create'])->middleware('auth');
+Route::post('/vistas/Pacientes/pacientesStore', [PacientesController::class,'store'])->middleware('auth');
+Route::get('/vistas/Pacientes/pacientesEdit/{pacientes}', [PacientesController::class,'edit'])->middleware('auth');
+Route::put('/vistas/Pacientes/pacientesUpdate/{pacientes}', [PacientesController::class,'update'])->middleware('auth');
+Route::delete('/vistas/Pacientes/pacientesDestroy/{pacientes}',[PacientesController::class, 'destroy'])->middleware('auth');
+
+
 
 Route::get('/consultaEmpleados', [LoginController::class, 'consultaEmpleados'])->name('ConsultaEmpleados')->middleware('auth');
 

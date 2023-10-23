@@ -40,10 +40,7 @@
                 <div class="card-body">
                     <form action="/vistas/Citas/citasStore" method="post" class="row g-3 needs-validation">
                         @csrf
-                        <div class="col-md-4">
-                            <label class="form-label"><b>Nombre Cita</b></label>
-                            <input type="text" class="form-control" name="nombre_cita" value="{{ old('nombre_cita') }}">
-                        </div>
+
 
                         <div class="col-md-4">
                             <label class="form-label"><b>Motivo</b></label>
