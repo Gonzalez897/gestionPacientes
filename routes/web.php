@@ -1,8 +1,10 @@
 <?php
 
 //use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\CitasController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\InicioController;
@@ -19,13 +21,32 @@ use App\Http\Controllers\InicioController;
 */
 
 
-Route::get('/formEmpleado', [LoginController::class, 'create']);
+Route::get('/usersIngreso', [LoginController::class, 'create']);
 
-Route::post('/ingresoEmpleados', [LoginController::class, 'store'])->name('ingresoEmpleados');
+Route::post('/userInsert', [LoginController::class, 'store'])->name('userInsert');
 
-Route::get('/empleado/edit/{empleado}', [LoginController::class, 'empleadosEdit'])->middleware('auth');
+Route::get('/formEmpleado', [LoginController::class, 'formEmpleados'])->name('formEmpleados')->middleware('auth');
 
-Route::put('/empleado/update/{empleado}', [LoginController::class, 'update'])->name('actualizarEmpleado')->middleware('auth');
+Route::post('/ingresoEmpleados', [LoginController::class, 'ingresarEmpleados'])->name('ingresoEmpleados');
+
+Route::get('/olvidoClave', [LoginController::class, 'olvidoPassword'])->name('olvidoClave')->middleware('guest');
+
+Route::post('/verificarCorreo', [LoginController::class, 'verificarCorreo'])->name('verificarCorreo')->middleware('guest');
+
+Route::get('/reseteoClave/{token}/{email}', [LoginController::class, 'reseteoClave'])->name('reseteoClave')->middleware('guest');
+
+Route::put('/updateClave', [loginController::class, 'updatePassword'])->name('updatePassword')->middleware('guest');
+
+Route::get('/consultaEmpleados', [LoginController::class, 'consultaEmpleados'])->name('consultaEmpleados')->middleware('auth');
+
+Route::get('/empleado/edit/{empleado}', [LoginController::class, 'empleadosEdit'])->name('formEmpleadoUpdate')->middleware('auth');
+
+Route::put('/empleado/userUpdate/{user}', [LoginController::class, 'userUpdate'])->name('userUpdate')->middleware('auth');
+
+Route::put('/empleado/empleadoUpdate/{empleado}', [LoginController::class, 'empleadoUpdate'])->name('empleadoUpdate')->middleware('auth');
+
+Route::delete('/empleado/empleadoDelete/{empleado}', [LoginController::class, 'empleadoDelete'])->name('empleadoDelete')->middleware('auth');
+
 
 Route::get('/', [InicioController::class,'inicio'])->middleware('auth');
 
@@ -46,8 +67,6 @@ Route::delete('/vistas/Citas/citasDestroy/{citas}',[CitasController::class, 'des
 Route::get('/recetas', [InicioController::class, 'recetas'])->name('recetas')->middleware('auth');
 
 Route::get('/Pacientes', [InicioController::class, 'Pacientes'])->name('Pacientes')->middleware('auth');
-
-Route::get('/consultaEmpleados', [LoginController::class, 'consultaEmpleados'])->name('ConsultaEmpleados')->middleware('auth');
 
 
 Auth::routes();

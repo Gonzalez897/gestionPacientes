@@ -44,6 +44,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
+                                <a class="btn btn-link" href="{{ route('olvidoClave') }}">
+                                    Olvido su contraseña?
+                                </a>
                             </div>
                         </div>
                     </form>

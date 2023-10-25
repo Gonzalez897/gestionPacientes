@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('dui');
             $table->string('cargo');
             $table->date('f_nacimiento');
+            $table->unsignedBigInteger('id');
+            $table->foreign('id')->references('id')->on('users');
             $table->timestamps();
         });
     }
