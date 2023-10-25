@@ -102,7 +102,8 @@ class LoginController extends Controller
 
     public function formEmpleados() {
 
-        $usuarios = User::select('users.id', 'users.name')->from('users')->get();
+        $usuarios = User::select('users.id', 'users.name')->from('users')
+        ->join('empleados', 'users.id', '=', 'empleados.id', 'left')->where('empleados.id')->get();
 
         return view('vistas/empleados/ingresoEmpleados', compact('usuarios'));
 
@@ -135,9 +136,9 @@ class LoginController extends Controller
 
 
             $datos_empleado = [
-                'id' => $campos_datos['id_usuario'],
+                'id' => $request->input('id_usuario'),
                 'nombre' => $campos_datos['nombre_empleado'],
-                'apellido' => $campos_datos['apellido'],
+                'apellido' => $campos_datos['apellido_empleado'],
                 'dui' => $campos_datos['dui_empleado'],
                 'cargo' => $campos_datos['cargo_empleado'],
                 'f_nacimiento' => $campos_datos['fecha_nacimiento']
@@ -147,7 +148,7 @@ class LoginController extends Controller
 
             session()->flash('mensaje', "Se ha ingresado al empleado con exito");
 
-            return redirect()->route('ingresoEmpleados');
+            return redirect()->route('formEmpleados');
             
         } else {
 

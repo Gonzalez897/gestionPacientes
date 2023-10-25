@@ -31,7 +31,7 @@
                         <div id="divSelectUser">
                             <span>Seleccionar el usuario</span>
                             <br>
-                            <select name="id_usuario" id="" class="form-control">
+                            <select name="id_usuario" class="form-control">
                                 <option value="">~</option>
                                 @foreach ($usuarios as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -175,6 +175,8 @@
         $(document).ready(function() {
 
             $('#divSelectUser').hide();
+
+            $('#nuevoUser').hide();
 
             $('#radio1').click(function() {
 
