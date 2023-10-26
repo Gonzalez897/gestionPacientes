@@ -6,33 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('titulo')</title>
     <style>
-        /* The side navigation menu */
-        .sidebar {
-            margin: 0;
-            padding: 0;
-            width: 200px;
-            background-color: darkslateblue;
-            position: fixed;
+        body {
+            font-family: "Lato", sans-serif;
+        }
+
+        /* Fixed sidenav, full height */
+        .sidenav {
             height: 100%;
-            overflow: auto;
-            text-align: left;
+            width: 200px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: darkslateblue;
+            overflow-x: hidden;
+            padding-top: 20px;
         }
 
-        /* Sidebar links */
-        .sidebar a {
-            display: block;
-            color: black;
-            padding: 12px;
-            text-decoration: none;
-            text-align: left;
-        }
-
+        /* Style the sidenav links and the dropdown button */
         .sidenav a,
         .dropdown-btn {
             padding: 6px 8px 6px 16px;
             text-decoration: none;
-            font-size: 15px;
-            color: #818181;
+            font-size: 20px;
+            color: white;
             display: block;
             border: none;
             background: none;
@@ -45,14 +42,14 @@
         /* On mouse-over */
         .sidenav a:hover,
         .dropdown-btn:hover {
-            color: #f1f1f1;
+            color: #ffffff;
         }
 
         /* Main content */
         .main {
             margin-left: 200px;
             /* Same as the width of the sidenav */
-            font-size: 15px;
+            font-size: 17px;
             /* Increased text to enable scrolling */
             padding: 0px 10px;
         }
@@ -66,57 +63,24 @@
         /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
         .dropdown-container {
             display: none;
-            background-color: #262626;
+            background-color: darkslateblue;
             padding-left: 8px;
         }
 
         /* Optional: Style the caret down icon */
-        .fa{
+        .fa-caret-down {
             float: right;
             padding-right: 8px;
         }
 
-        /* Active/current link */
-        .sidebar a.active {
-            background-color: black;
-            color: white;
-        }
-
-        /* Links on mouse-over */
-        .sidebar a:hover:not(.active) {
-            background-color: black;
-            color: white;
-        }
-
-        /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
-        div.content {
-            margin-left: 200px;
-            padding: 1px 16px;
-            height: 1000px;
-        }
-
-        /* On screens that are less than 700px wide, make the sidebar into a topbar */
-        @media screen and (max-width: 700px) {
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
+        /* Some media queries for responsiveness */
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
             }
 
-            .sidebar a {
-                float: left;
-            }
-
-            div.content {
-                margin-left: 0;
-            }
-        }
-
-        /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
-        @media screen and (max-width: 400px) {
-            .sidebar a {
-                text-align: center;
-                float: none;
+            .sidenav a {
+                font-size: 18px;
             }
         }
     </style>
@@ -140,7 +104,7 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
-<body style="background-color: rgb(54, 52, 52)">
+<body style="background-color: rgb(0, 0, 0)">
     <!-- The sidebar -->
     <div class="sidebar sidenav">
         <!-- Brand/logo -->
@@ -148,10 +112,13 @@
             <img src="{{ asset('imagenesSistema/imagenEmpresa3.jpg') }}" alt="logo" style="width: 100px;">
         </a>
         @guest
-            <a class="nav-link" href="/usersIngreso"> <i class="fa fa-solid fa-user"></i>&nbsp<span class="links">Registro de usuarios</span></a>
+            <a class="nav-link" href="/usersIngreso"> <i class="fa fa-solid fa-user"></i>&nbsp<span class="links">Registro
+                    de usuarios</span></a>
         @else
-            <a class="nav-link" href="/"> <i class="fa fa-solid fa-house"></i>&nbsp<span class="links">Inicio</span></a>
-            <a class="nav-link" href="/vistas/Doctores/doctoresShow"><i class="fa fa-solid fa-user-doctor"></i><span class="links">Doctores</span></a>
+            <a class="nav-link" href="/"> <i class="fa fa-solid fa-house"></i>&nbsp<span
+                    class="links">Inicio</span></a>
+            <a class="nav-link" href="/vistas/Doctores/doctoresShow"><i class="fa fa-solid fa-user-doctor"></i><span
+                    class="links">Doctores</span></a>
 
             <button class="dropdown-btn">Consultas
                 <i class="fa fa-caret-down"></i>
@@ -173,39 +140,39 @@
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-                    <a class="dropdown-item" href="/vistas/Recetas/recetasCreate">Crear Recetas</a>
-                    <a class="dropdown-item" href="/vistas/Recetas/recetasShow">Ver Recetas Creadas</a>
+                <a class="dropdown-item" href="/vistas/Recetas/recetasCreate">Crear Recetas</a>
+                <a class="dropdown-item" href="/vistas/Recetas/recetasShow">Ver Recetas Creadas</a>
             </div>
 
             <button class="dropdown-btn">Pacientes
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-                   <a class="dropdown-item" href="/vistas/Pacientes/pacientesCreate">Ingresar Pacientes</a>
-                    <a class="dropdown-item" href="/vistas/Pacientes/pacientesShow">Ver Pacientes Ingresados</a>
+                <a class="dropdown-item" href="/vistas/Pacientes/pacientesCreate">Ingresar Pacientes</a>
+                <a class="dropdown-item" href="/vistas/Pacientes/pacientesShow">Ver Pacientes Ingresados</a>
             </div>
 
             <button class="dropdown-btn">Empleados
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-                    <a class="dropdown-item" href="/formEmpleado">Ingresar empleados</a>
-                    <a class="dropdown-item" href="/consultaEmpleados">Consultar empleados</a>
+                <a class="dropdown-item" href="/formEmpleado">Ingresar empleados</a>
+                <a class="dropdown-item" href="/consultaEmpleados">Consultar empleados</a>
             </div>
 
             <button class="dropdown-btn">{{ Auth::user()->name }}
                 <i class="fa fa-solid fa-user"></i>
             </button>
             <div class="dropdown-container">
-                   <a class="dropdown-item" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
-                        Cerrar Sesion
-                    </a>
+                    Cerrar Sesion
+                </a>
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </div>
             </li>
         @endguest
