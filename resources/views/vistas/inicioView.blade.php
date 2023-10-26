@@ -40,7 +40,7 @@
                     <img src="{{ asset('imagenesSistema/imagenEmpresa2.jpg') }}" class="d-block w-100 imgSlide" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Bienvenidos al sistema Gestion pacientes.</h5>
-                        <p><b>LEMA DE LA EMPRESA</b></p>
+                        <p><b>Simplificando el camino hacia la salud.</b></p>
                     </div>
                 </div>
                 <div class="carousel-item">

@@ -209,7 +209,7 @@ class LoginController extends Controller
                 'conf_clave' => 'required|same:clave',
                 'nombre_empleado' => 'required',
                 'apellido_empleado' => 'required',
-                'dui' => 'required|unique:users',
+                'dui' => 'required|unique:empleados',
                 'cargo_empleado' => 'required',
                 'fecha_nacimiento' => 'required'
             ], [
@@ -442,7 +442,7 @@ class LoginController extends Controller
             'users.estado',
             'doctores.especializacion'
         )->from('empleados')
-            ->join('users', 'users.idEmpleados', '=', 'empleados.idEmpleados')
+            ->join('users', 'users.id', '=', 'empleados.id')
             ->join('doctores', 'doctores.idDoctores', '=', 'doctores.idDoctores')
             ->where('empleados.idEmpleados', $user->id)->get();
 
