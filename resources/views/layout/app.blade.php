@@ -56,7 +56,7 @@
         <ul class="navbar-nav">
             @guest
                 <li class="nav-item">
-                    <a class="nav-link" href="/formEmpleado"><span class="links">Ingreso de empleados</span></a>
+                    <a class="nav-link" href="/usersIngreso"><span class="links">Ingreso de usuarios</span></a>
                 </li>
             @else
                 <li class="nav-item">
