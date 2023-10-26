@@ -24,7 +24,7 @@
         <br>
         <!--form-->
         <h3>
-            <b>Consulta de Citas</b>
+            <b>Listados de Citas</b>
         </h3>
         <br>
     <br>
@@ -54,7 +54,7 @@
                                 <td>{{ $item->created_at }}</td>
                                 <td>
                                     <a href="/vistas/Citas/citasEdit/{{ $item->idCitas }}"
-                                        class="btn btn-danger btn-sm">Modificar</a>
+                                        class="btn btn-primary btn-sm">Modificar</a>
                                     <button class="btn btn-danger btn-sm"
                                         url="/vistas/Citas/citasDestroy/{{ $item->idCitas }}" onclick="eliminar(this)"
                                         token="{{ csrf_token() }}">Eliminar</button>

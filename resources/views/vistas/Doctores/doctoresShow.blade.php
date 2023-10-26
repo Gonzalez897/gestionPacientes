@@ -14,7 +14,7 @@
         }
 
         #divTablaEmpleados {
-            background-color: whitesmoke;
+            background-color: darkgrey;
             width: 99%;
             padding-top: 10px;
         }
@@ -23,14 +23,14 @@
         <br>
         <!--form-->
         <h3>
-            <b>Consulta de Doctores</b>
+            <b>Listado de Doctores</b>
         </h3>
         <br>
 
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-11" id="divTablaEmpleados">
-                    <table id="tablaCitas" class="table table-hover table-bordered table-dark table-striped mt-2">
+                    <table id="tablaDoctores" class="table table-hover table-bordered table-dark table-striped mt-2">
                         <thead>
                             <tr>
                                 <td>Nombre del Doctor</td>

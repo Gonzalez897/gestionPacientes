@@ -24,7 +24,7 @@
             <br>
             <!--form-->
             <h3>
-                <b>Consulta de Pacientes</b>
+                <b>Listado de Pacientes</b>
             </h3>
             <br>
     <div class="container-fluid">
@@ -49,7 +49,7 @@
                                 <td>{{ $item->edad_paciente }}</td>
                                 <td>
                                     <a href="/vistas/Pacientes/pacientesEdit/{{ $item->idPacientes }}"
-                                        class="btn btn-danger btn-sm">Modificar</a>
+                                        class="btn btn-primary btn-sm">Modificar</a>
                                     <button class="btn btn-danger btn-sm"
                                         url="/vistas/Pacientes/pacientesDestroy/{{ $item->idPacientes }}"
                                         onclick="eliminar(this)" token="{{ csrf_token() }}">Eliminar</button>
