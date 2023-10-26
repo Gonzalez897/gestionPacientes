@@ -42,8 +42,8 @@
                             <div class="col-12">
                                 <span>Nombre usuario</span><span class="text-danger">*</span>
                                 <br>
-                                <input class="form-control" type="text" name="usuario" value="{{ old('usuario') }}">
-                                @error('usuario')
+                                <input class="form-control" type="text" name="name" value="{{ old('name') }}">
+                                @error('name')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -153,6 +153,18 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
+                        <br>
+                        <div id="divEspecializacion">
+                            <span>Especializacion:</span><span class="text-danger">*</span>
+                            <br>
+                            <input class="form-control" type="text" name="especializacion"
+                                value="{{ old('especializacion') }}">
+                            @error('especializacion')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                     </div>
                 </div>
                 <div class="card-footer text-center">
@@ -176,7 +188,11 @@
 
             $('#divSelectUser').hide();
 
+            $('#divAlerta').fadeOut(3500);
+
             $('#nuevoUser').hide();
+
+            $('#divEspecializacion').hide();
 
             $('#radio1').click(function() {
 
@@ -202,6 +218,16 @@
 
                     $('#nuevoUser').show();
 
+                }
+
+            });
+
+            $('#selectCargo').change(function() {
+
+                if ($(this).val() == "Doctor") {
+                    $('#divEspecializacion').show();
+                } else {
+                    $('#divEspecializacion').hide();
                 }
 
             });
