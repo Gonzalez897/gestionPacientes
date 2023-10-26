@@ -96,7 +96,7 @@ class LoginController extends Controller
         session()->forget('token');
         session()->forget('email');
 
-        session()->flash('mensaje', "Se restauro la contraseña");
+        session()->flash('mensaje', "Contraseña restaurada correctamente");
 
         return redirect()->route('login');
     }

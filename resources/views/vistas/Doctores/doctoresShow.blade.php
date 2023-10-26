@@ -34,7 +34,7 @@
                 <td>Especializacion</td>
                 <td>Dosponibilidad</td>
                 <td>Fecha de creacion</td>
-                @if (Auth::user()->estado == 'superusuario')
+                @if (Auth::user()->estado == 'superusuario' || Auth::user()->estado == 'Doctor')
                     <td>Acciones</td>
                 @endif
             </tr>
@@ -48,7 +48,7 @@
                     <td>{{ $item->especializacion }}</td>
                     <td>{{ $item->disponibilidad }}</td>
                     <td>{{ $item->created_at }}</td>
-                    @if (Auth::user()->estado == 'superusuario')
+                    @if (Auth::user()->estado == 'superusuario' || Auth::user()->estado == 'Doctor')
                         <td>
                             <a href="/vistas/Doctores/doctoresEdit/{{ $item->idDoctores }}"
                                 class="btn btn-danger btn-sm">Modificar</a>

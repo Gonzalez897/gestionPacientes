@@ -67,7 +67,7 @@
                         @endif
                         @if (session('mensajeError'))
                             <div class="alert alert-danger" id="divAlerta">
-                                {{ session('mensaje') }}
+                                {{ session('mensajeError') }}
                             </div>
                         @endif
                     </div>

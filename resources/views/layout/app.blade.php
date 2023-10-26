@@ -178,37 +178,6 @@
                             </li>
                         </ul>
                     </li>
-                @endif
-
-                @if (Auth::user()->estado == 'Secretaria')
-                    <li class="nav-item">
-                        <a class="nav-link" href="/"><span class="links">Inicio</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/consultas"><span class="links">Consultas</span></a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-light" href="#" role="button"
-                            data-bs-toggle="dropdown"><span class="links">Citas</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/vistas/Citas/citasCreate">Crear Citas</a></li>
-                            <li><a class="dropdown-item" href="/vistas/Citas/citasShow">Ver Citas Creadas</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-light" href="#" role="button"
-                            data-bs-toggle="dropdown"><span class="links">Pacientes</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/vistas/Pacientes/pacientesCreate">Ingresar Pacientes</a>
-                            </li>
-                            <li><a class="dropdown-item" href="/vistas/Pacientes/pacientesShow">Ver Pacientes
-                                    Ingresados</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/vistas/Doctores/doctoresShow"><span class="links">Doctores</span></a>
-                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-light" href="#" role="button"
                             data-bs-toggle="dropdown"><span class="links">Empleados</span></a>
@@ -218,6 +187,7 @@
                         </ul>
                     </li>
                 @endif
+
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle text-light" href="#" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
