@@ -34,7 +34,7 @@
                                                 </span>
                                             @enderror
                                             <br>
-                                            @if ($empleado_datos[0]->estado == 'superusuario')
+                                            @if (Auth::user()->estado == 'superusuario')
                                                 <span>Nueva Constraseña:</span>
                                                 <br>
                                                 <input class="form-control" type="password" name="clave"

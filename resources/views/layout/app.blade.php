@@ -53,63 +53,178 @@
         </a>
 
         <!-- Links -->
-        <ul class="navbar-nav">
+        <ul class="navbar-nav ms-auto">
             @guest
                 <li class="nav-item">
                     <a class="nav-link" href="/usersIngreso"><span class="links">Ingreso de usuarios</span></a>
                 </li>
             @else
-                <li class="nav-item">
-                    <a class="nav-link" href="/"><span class="links">Inicio</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/consultas"><span class="links">Consultas</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/vistas/Doctores/doctoresShow"><span class="links">Doctores</span></a>
-                </li>
+                @if (Auth::user()->estado == 'Doctor')
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><span class="links">Inicio</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/consultas"><span class="links">Consultas</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/vistas/Doctores/doctoresShow"><span class="links">Doctores</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                            data-bs-toggle="dropdown"><span class="links">Citas</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/vistas/Citas/citasCreate">Crear Citas</a></li>
+                            <li><a class="dropdown-item" href="/vistas/Citas/citasShow">Ver Citas Creadas</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                            data-bs-toggle="dropdown"><span class="links">Recetas</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/vistas/Recetas/recetasCreate">Crear Recetas</a></li>
+                            <li><a class="dropdown-item" href="/vistas/Recetas/recetasShow">Ver Recetas Creadas</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                            data-bs-toggle="dropdown"><span class="links">Pacientes</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/vistas/Pacientes/pacientesCreate">Ingresar Pacientes</a>
+                            </li>
+                            <li><a class="dropdown-item" href="/vistas/Pacientes/pacientesShow">Ver Pacientes Ingresados</a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-light" href="#" role="button"
-                        data-bs-toggle="dropdown"><span class="links">Citas</span></a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/vistas/Citas/citasCreate">Crear Citas</a></li>
-                        <li><a class="dropdown-item" href="/vistas/Citas/citasShow">Ver Citas Creadas</a></li>
-                    </ul>
-                </li>
+                @if (Auth::user()->estado == 'Secretaria')
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><span class="links">Inicio</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/consultas"><span class="links">Consultas</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                            data-bs-toggle="dropdown"><span class="links">Citas</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/vistas/Citas/citasCreate">Crear Citas</a></li>
+                            <li><a class="dropdown-item" href="/vistas/Citas/citasShow">Ver Citas Creadas</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                            data-bs-toggle="dropdown"><span class="links">Pacientes</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/vistas/Pacientes/pacientesCreate">Ingresar Pacientes</a>
+                            </li>
+                            <li><a class="dropdown-item" href="/vistas/Pacientes/pacientesShow">Ver Pacientes
+                                    Ingresados</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/vistas/Doctores/doctoresShow"><span class="links">Doctores</span></a>
+                    </li>
+                @endif
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-light" href="#" role="button"
-                        data-bs-toggle="dropdown"><span class="links">Recetas</span></a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/vistas/Recetas/recetasCreate">Crear Recetas</a></li>
-                        <li><a class="dropdown-item" href="/vistas/Recetas/recetasShow">Ver Recetas Creadas</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-light" href="#" role="button"
-                        data-bs-toggle="dropdown"><span class="links">Pacientes</span></a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/vistas/Pacientes/pacientesCreate">Ingresar Pacientes</a></li>
-                        <li><a class="dropdown-item" href="/vistas/Pacientes/pacientesShow">Ver Pacientes Ingresados</a></li>
-                    </ul>
-                </li>
+                @if (Auth::user()->estado == 'Empleado')
+                    <li class="nav-item">
+                        <a class="nav-link" href="/vistas/Doctores/doctoresShow"><span class="links">Doctores</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                            data-bs-toggle="dropdown"><span class="links">Empleados</span></a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="/consultaEmpleados">Consultar empleados</a></li>
+                        </ul>
+                    </li>
+                @endif
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-light" href="#" role="button"
-                        data-bs-toggle="dropdown"><span class="links">Empleados</span></a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/formEmpleado">Ingresar empleados</a></li>
-                        <li><a class="dropdown-item" href="/consultaEmpleados">Consultar empleados</a></li>
-                    </ul>
-                </li>
+                @if (Auth::user()->estado == 'superusuario')
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><span class="links">Inicio</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/consultas"><span class="links">Consultas</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/vistas/Doctores/doctoresShow"><span class="links">Doctores</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                            data-bs-toggle="dropdown"><span class="links">Citas</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/vistas/Citas/citasCreate">Crear Citas</a></li>
+                            <li><a class="dropdown-item" href="/vistas/Citas/citasShow">Ver Citas Creadas</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                            data-bs-toggle="dropdown"><span class="links">Recetas</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/vistas/Recetas/recetasCreate">Crear Recetas</a></li>
+                            <li><a class="dropdown-item" href="/vistas/Recetas/recetasShow">Ver Recetas Creadas</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                            data-bs-toggle="dropdown"><span class="links">Pacientes</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/vistas/Pacientes/pacientesCreate">Ingresar Pacientes</a>
+                            </li>
+                            <li><a class="dropdown-item" href="/vistas/Pacientes/pacientesShow">Ver Pacientes
+                                    Ingresados</a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
+
+                @if (Auth::user()->estado == 'Secretaria')
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><span class="links">Inicio</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/consultas"><span class="links">Consultas</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                            data-bs-toggle="dropdown"><span class="links">Citas</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/vistas/Citas/citasCreate">Crear Citas</a></li>
+                            <li><a class="dropdown-item" href="/vistas/Citas/citasShow">Ver Citas Creadas</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                            data-bs-toggle="dropdown"><span class="links">Pacientes</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/vistas/Pacientes/pacientesCreate">Ingresar Pacientes</a>
+                            </li>
+                            <li><a class="dropdown-item" href="/vistas/Pacientes/pacientesShow">Ver Pacientes
+                                    Ingresados</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/vistas/Doctores/doctoresShow"><span class="links">Doctores</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                            data-bs-toggle="dropdown"><span class="links">Empleados</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/formEmpleado">Ingresar empleados</a></li>
+                            <li><a class="dropdown-item" href="/consultaEmpleados">Consultar empleados</a></li>
+                        </ul>
+                    </li>
+                @endif
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle text-light" href="#" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         <span class="links">{{ Auth::user()->name }}</span>
                     </a>
 
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">

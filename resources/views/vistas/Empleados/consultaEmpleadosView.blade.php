@@ -20,13 +20,14 @@
                         <th>Fecha de nacimiento</th>
                         <th>Usuario</th>
                         <th>Rol</th>
-                        <th>Correo Electronico</th>
-                        <th>Acciones</th>
+                        @if (Auth::user()->estado == 'superusuario')
+                            <th>Correo Electronico</th>
+                            <th>Acciones</th>
+                        @endif
                     </thead>
                     <tbody>
                         @foreach ($empleados as $valor)
-                            @if (Auth::user()->estado != "superusuario")
-                                @if ($valor->estado != "superusuario")
+                            @if (Auth::user()->estado == 'superusuario')
                                 <tr>
                                     <td>{{ $valor->nombre }}</td>
                                     <td>{{ $valor->apellido }}</td>
@@ -46,7 +47,6 @@
                                             class="btn btn-danger">Eliminar</button>
                                     </td>
                                 </tr>
-                                @endif
                             @else
                                 <tr>
                                     <td>{{ $valor->nombre }}</td>
@@ -56,16 +56,6 @@
                                     <td>{{ $valor->f_nacimiento }}</td>
                                     <td>{{ $valor->name }}</td>
                                     <td>{{ $valor->estado }}</td>
-                                    <td>{{ $valor->email }}</td>
-                                    <td>
-                                        <a class="btn btn-primary"
-                                            href="/empleado/edit/{{ $valor->idEmpleados }}">Modificar</a>
-                                        &nbsp;&nbsp;&nbsp;
-                                        <button type="button"
-                                            url="{{ route('empleadoDelete', ['empleado' => $valor->idEmpleados]) }}"
-                                            onclick="eliminar(this)" token="{{ csrf_token() }}"
-                                            class="btn btn-danger">Eliminar</button>
-                                    </td>
                                 </tr>
                             @endif
                         @endforeach

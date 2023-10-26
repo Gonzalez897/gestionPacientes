@@ -36,7 +36,7 @@ Route::get('/olvidoClave', [LoginController::class, 'olvidoPassword'])->name('ol
 
 Route::post('/verificarCorreo', [LoginController::class, 'verificarCorreo'])->name('verificarCorreo')->middleware('guest');
 
-Route::get('/reseteoClave/{token}/{email}', [LoginController::class, 'reseteoClave'])->name('reseteoClave')->middleware('guest');
+Route::get('/reseteoClave/{token}', [LoginController::class, 'reseteoClave'])->name('reseteoClave')->middleware('guest');
 
 Route::put('/updateClave', [loginController::class, 'updatePassword'])->name('updatePassword')->middleware('guest');
 

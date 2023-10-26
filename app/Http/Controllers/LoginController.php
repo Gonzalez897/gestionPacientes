@@ -8,6 +8,7 @@ use App\Models\DoctorModel;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\EmpleadoModel;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
@@ -43,9 +44,8 @@ class LoginController extends Controller
 
         if (count($consulta_users) > 0) {
 
-            session()->put('token', $request->input('_token'));
+            session()->put('token', Str::random(32));
             session()->put('email', $consulta_users[0]->email);
-
 
             return redirect()->route('reseteoClave', ['token' => session()->get('token'), 'email' => session()->get('email')]);
         } else {
@@ -55,15 +55,16 @@ class LoginController extends Controller
         }
     }
 
-    public function reseteoClave($token, $email)
+    public function reseteoClave($token)
     {
 
-        if ($token == session()->get('token')) {
+        if (session()->get('token') == $token) {
+            $email = session()->get('email');
             return view('/vistas/recuperar_clave/cambioClave', compact('token', 'email'));
         } else {
-            session()->flash('mensaje', 'Hubo un error');
+            session()->flash('mensajeError', 'Hubo un error');
 
-            return redirect()->route('olvidoClave');
+            return redirect()->route('login');
         }
     }
 
@@ -72,11 +73,32 @@ class LoginController extends Controller
         $datos = $request->validate([
             'token' => 'required',
             'email' => 'required',
-            'password' => 'required|min:8',
-            'password-confirm' => 'required|same:password'
+            'nuevaClave' => 'required|min:8',
+            'confClave' => 'required|same:nuevaClave'
+        ], [
+            'nuevaClave.required' => 'Se debe ingresar la contraseña',
+            'nuevaClave.min' => "La contraseña debe tener minimo 8 caracteres",
+            'confClave.required' => "Se require reingresar la contraseña para su confirmacion"
         ]);
 
-        echo $datos['email'];
+        $consulta_usuario = User::where('email', $datos['email'])->get();
+
+        $consulta_usuario[0]->password = Hash::make($datos['nuevaClave']);
+        $consulta_usuario[0]->save();
+
+        if (session()->get('token') != $datos['token']) {
+
+            session()->flash('mensajeError', 'Hubo un error');
+
+            return redirect()->route('login');
+        }
+
+        session()->forget('token');
+        session()->forget('email');
+
+        session()->flash('mensaje', "Se restauro la contraseña");
+
+        return redirect()->route('login');
     }
 
     public function consultaEmpleados(Request $request)
@@ -100,27 +122,29 @@ class LoginController extends Controller
         return view('vistas/Empleados/consultaEmpleadosView', compact('empleados'));
     }
 
-    public function formEmpleados() {
+    public function formEmpleados()
+    {
 
         $usuarios = User::select('users.id', 'users.name')->from('users')
-        ->join('empleados', 'users.id', '=', 'empleados.id', 'left')->where('empleados.id')->get();
+            ->join('empleados', 'users.id', '=', 'empleados.id', 'left')->where('empleados.id')->get();
 
         return view('vistas/empleados/ingresoEmpleados', compact('usuarios'));
-
     }
 
-    public function ingresarEmpleados(Request $request) {
+    public function ingresarEmpleados(Request $request)
+    {
 
         $accion_radio = request()->validate([
             'accionRadio' => 'required'
-        ],[
+        ], [
             'accionRadio.required' => "Se debe marcar una accion para continuar el proceso"
         ]);
 
         if ($accion_radio['accionRadio'] == "seleccionar") {
-            
+
             $campos_datos = request()->validate([
                 'id_usuario' => 'required',
+                'rol_usuario' => 'required',
                 'nombre_empleado' => 'required',
                 'apellido_empleado' => 'required',
                 'dui_empleado' => 'required',
@@ -128,6 +152,7 @@ class LoginController extends Controller
                 'fecha_nacimiento' => 'required'
             ], [
                 'id_usuario.required' => "Se debe asignar un usuario",
+                'rol_usuario.required' => "Se debe asignar un rol al usuario",
                 'nombre_empleado.required' => "Se debe ingresar el nombre del empleado",
                 'apellido_empleado.required' => "Se debe ingresar el apellido del empleado",
                 'dui_empleado.required' => "Se debe ingresar el dui del empleado",
@@ -136,7 +161,7 @@ class LoginController extends Controller
 
 
             $datos_empleado = [
-                'id' => $request->input('id_usuario'),
+                'id' => $campos_datos['id_usuario'],
                 'nombre' => $campos_datos['nombre_empleado'],
                 'apellido' => $campos_datos['apellido_empleado'],
                 'dui' => $campos_datos['dui_empleado'],
@@ -144,17 +169,21 @@ class LoginController extends Controller
                 'f_nacimiento' => $campos_datos['fecha_nacimiento']
             ];
 
+            $consulta_usuario = User::find($campos_datos['id_usuario']);
+
+            $consulta_usuario->estado = $campos_datos['rol_usuario'];
+            $consulta_usuario->save();
+
             EmpleadoModel::create($datos_empleado);
 
             session()->flash('mensaje', "Se ha ingresado al empleado con exito");
 
             return redirect()->route('formEmpleados');
-            
         } else {
 
             $campos_datos = request()->validate([
                 'name' => 'required|unique:users',
-                'email' => 'required',
+                'email' => 'required|unique:users',
                 'clave' => 'required|min:8',
                 'conf_clave' => 'required|same:clave',
                 'nombre_empleado' => 'required',
@@ -163,8 +192,9 @@ class LoginController extends Controller
                 'cargo_empleado' => 'required',
                 'fecha_nacimiento' => 'required'
             ], [
-                'usuario.required' => "Se debe ingresar el nombre de usuario",
+                'name.required' => "Se debe ingresar el nombre de usuario",
                 'email.required' => "Se debe ingresar un correo electronico",
+                'email.unique' => "El correo ingresado ya exite en el sistema",
                 'clave.required' => "Se debe ingresar una contraseña",
                 'clave.min' => "La contraseña debe tener 8 caracteres",
                 'conf_clave.required' => "Se debe confirmar la contraseña",
@@ -172,7 +202,8 @@ class LoginController extends Controller
                 'nombre_empleado.required' => "Se debe ingresar el nombre del empleado",
                 'apellido_empleado.required' => "Se debe ingresar el apellido del empleado",
                 'dui_empleado.required' => "Se debe ingresar el dui del empleado",
-                'cargo_empleado.required' => "Se debe ingresar la fecha de nacimiento del empleado"
+                'cargo_empleado.required' => "Se debe ingresar el cargo del empleado",
+                'fecha_nacimiento.required' => "Se debe ingresar la fecha de nacimiento del empleado"
             ]);
 
             $datos_usuario = [
@@ -198,16 +229,16 @@ class LoginController extends Controller
             EmpleadoModel::create($datos_empleado);
 
             $empleado_creado = EmpleadoModel::select('idEmpleados')->from('empleados')
-            ->where('dui', $datos_empleado['dui'])->get();
+                ->where('dui', $datos_empleado['dui'])->get();
 
-            if ($campos_datos['cargo_empleado']) {
+            if ($campos_datos['cargo_empleado'] == "Doctor") {
 
                 $campos_especializacion = request()->validate([
                     'especializacion' => 'required'
                 ], [
                     'especializacion.required' => "Se debe ingresar la especializacion del doctor"
                 ]);
-                
+
                 $datos_doctor = [
                     'idEmpleado' => $empleado_creado[0]->idEmpleados,
                     'especializacion' => $campos_especializacion['especializacion'],
@@ -215,13 +246,11 @@ class LoginController extends Controller
                 ];
 
                 DoctorModel::create($datos_doctor);
-                
             }
 
             session()->flash('mensaje', "Se ha ingresado al empleado con exito");
 
             return redirect()->route('formEmpleados');
-
         }
     }
 
@@ -309,22 +338,41 @@ class LoginController extends Controller
      */
     public function empleadosEdit(EmpleadoModel $empleado)
     {
-        $empleado_datos = EmpleadoModel::select(
-            'empleados.idEmpleados',
-            'empleados.nombre',
-            'empleados.apellido',
-            'empleados.dui',
-            'empleados.cargo',
-            'empleados.f_nacimiento',
-            'users.id',
-            'users.name',
-            'users.email',
-            'users.estado',
-            'doctores.especializacion'
-        )->from('empleados')
-            ->join('users', 'users.id', '=', 'empleados.id')
-            ->join('doctores', 'doctores.idDoctores', '=', 'doctores.idDoctores')
-            ->where('empleados.idEmpleados', $empleado->idEmpleados)->get();
+        if ($empleado->estado == "Doctor") {
+
+            $empleado_datos = EmpleadoModel::select(
+                'empleados.idEmpleados',
+                'empleados.nombre',
+                'empleados.apellido',
+                'empleados.dui',
+                'empleados.cargo',
+                'empleados.f_nacimiento',
+                'users.id',
+                'users.name',
+                'users.email',
+                'users.estado',
+                'doctores.especializacion'
+            )->from('empleados')
+                ->join('users', 'users.id', '=', 'empleados.id')
+                ->join('doctores', 'doctores.idDoctores', '=', 'doctores.idDoctores')
+                ->where('empleados.idEmpleados', $empleado->idEmpleados)->get();
+        } else {
+
+            $empleado_datos = EmpleadoModel::select(
+                'empleados.idEmpleados',
+                'empleados.nombre',
+                'empleados.apellido',
+                'empleados.dui',
+                'empleados.cargo',
+                'empleados.f_nacimiento',
+                'users.id',
+                'users.name',
+                'users.email',
+                'users.estado'
+            )->from('empleados')
+                ->join('users', 'users.id', '=', 'empleados.id')
+                ->where('empleados.idEmpleados', $empleado->idEmpleados)->get();
+        }
 
         return view('vistas/Empleados/formUpdateEmpleados', compact('empleado', 'empleado_datos'));
     }
@@ -411,7 +459,7 @@ class LoginController extends Controller
             $doctores->save();
         }
 
-        $request->session()->flash('mensaje', 'Se ha actualizado con exito');
+        session()->flash('mensaje', 'Se ha actualizado con exito');
 
         return redirect()->route('formEmpleadoUpdate', ['empleado' => $empleado->idEmpleados]);
     }

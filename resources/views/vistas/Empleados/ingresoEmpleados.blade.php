@@ -14,21 +14,46 @@
                 </div>
                 <div class="card-body row justify-content-center">
                     <div class="col-4">
-                        <div class="form-check">
-                            <input type="radio" class="form-check-input" id="radio1" name="accionRadio"
-                                value="seleccionar">
-                            <label class="form-check-label" for="radio1">Seleccionar un usuario</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="radio" class="form-check-input" id="radio2" name="accionRadio" value="nuevo">
-                            <label class="form-check-label" for="radio2">Nuevo usuario</label>
-                        </div>
+                        @if (old('accionRadio') == 'seleccionar')
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="radio1" name="accionRadio"
+                                    value="seleccionar" checked>
+                                <label class="form-check-label" for="radio1">Seleccionar un usuario</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="radio2" name="accionRadio"
+                                    value="nuevo">
+                                <label class="form-check-label" for="radio2">Nuevo usuario</label>
+                            </div>
+                        @elseif(old('accionRadio') == 'nuevo')
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="radio1" name="accionRadio"
+                                    value="seleccionar">
+                                <label class="form-check-label" for="radio1">Seleccionar un usuario</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="radio2" name="accionRadio"
+                                    value="nuevo" checked>
+                                <label class="form-check-label" for="radio2">Nuevo usuario</label>
+                            </div>
+                        @else
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="radio1" name="accionRadio"
+                                    value="seleccionar">
+                                <label class="form-check-label" for="radio1">Seleccionar un usuario</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="radio2" name="accionRadio"
+                                    value="nuevo">
+                                <label class="form-check-label" for="radio2">Nuevo usuario</label>
+                            </div>
+                        @endif
                         @error('accionRadio')
                             <span class="invalid-feedback d-block" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                        <div id="divSelectUser">
+                        <div class="mt-2" id="divSelectUser">
                             <span>Seleccionar el usuario</span>
                             <br>
                             <select name="id_usuario" class="form-control">
@@ -37,8 +62,31 @@
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
+                            @error('id_usuario')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            <br>
+                            <div>
+                                <span>Rol del empleado</span><span class="text-danger">*</span>
+                                <br>
+                                <select name="rol_usuario" class="form-control">
+                                    <option value="">~</option>
+                                    <option value="Secretaria">Secretaria</option>
+                                    <option value="Doctor">Doctor</option>
+                                    @if (Auth::user()->estado == 'superusuario')
+                                        <option value="superusuario">SuperUsuario</option>
+                                    @endif
+                                </select>
+                            </div>
+                            @error('rol_usuario')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
-                        <div class="row" id="nuevoUser">
+                        <div class="row mt-2" id="nuevoUser">
                             <div class="col-12">
                                 <span>Nombre usuario</span><span class="text-danger">*</span>
                                 <br>
@@ -102,7 +150,8 @@
                         <br>
                         <span>Dui del empleado</span><span class="text-danger">*</span>
                         <br>
-                        <input class="form-control" type="text" name="dui_empleado" value="{{ old('dui_empleado') }}">
+                        <input class="form-control" type="text" name="dui_empleado"
+                            value="{{ old('dui_empleado') }}">
                         @error('dui_empleado')
                             <span class="invalid-feedback d-block" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -194,9 +243,25 @@
 
             $('#divEspecializacion').hide();
 
-            $('#radio1').click(function() {
+            var seleccionar_usuario = document.querySelector('#radio1');
 
-                var seleccionar_usuario = document.querySelector('#radio1');
+            var nuevo_usuario = document.querySelector('#radio2');
+
+            if (seleccionar_usuario.checked) {
+
+                $('#divSelectUser').show();
+
+                $('#nuevoUser').hide();
+
+            } else if (nuevo_usuario.checked) {
+
+                $('#divSelectUser').hide();
+
+                $('#nuevoUser').show();
+
+            }
+
+            $('#radio1').click(function() {
 
                 if (seleccionar_usuario.checked) {
 
@@ -209,8 +274,6 @@
             });
 
             $('#radio2').click(function() {
-
-                var nuevo_usuario = document.querySelector('#radio2');
 
                 if (nuevo_usuario.checked) {
 
