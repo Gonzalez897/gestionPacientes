@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CitasController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\RecetaController;
+use App\Http\Controllers\DoctoresController;
 use App\Http\Controllers\PacientesController;
 
 /*
@@ -32,9 +34,16 @@ Route::get('/', [InicioController::class,'inicio'])->middleware('auth');
 
 Route::get('/consultas', [InicioController::class, 'consultas'])->name('consultas')->middleware('auth');
 
-Route::get('/doctores', [InicioController::class, 'doctores'])->name('doctores')->middleware('auth');
 
-// CITAS RUTAS CON CRUD
+// DOCTORES CRUD
+Route::get('/vistas/Doctores/doctoresShow', [DoctoresController::class,'index'])->middleware('auth');
+Route::post('/vistas/Doctores/doctoresStore', [DoctoresController::class,'store'])->middleware('auth');
+Route::get('/vistas/Doctores/doctoresEdit/{doctores}', [DoctoresController::class,'edit'])->middleware('auth');
+Route::put('/vistas/Doctores/doctoresUpdate/{doctores}', [DoctoresController::class,'update'])->middleware('auth');
+Route::delete('/vistas/Doctores/doctoresDestroy/{doctores}',[DoctoresController::class, 'destroy'])->middleware('auth');
+
+
+// CITAS CRUD
 Route::get('/vistas/Citas/citasShow', [CitasController::class,'index'])->middleware('auth');
 Route::get('/vistas/Citas/citasCreate', [CitasController::class,'create'])->middleware('auth');
 Route::post('/vistas/Citas/citasStore', [CitasController::class,'store'])->middleware('auth');
@@ -43,8 +52,14 @@ Route::put('/vistas/Citas/citasUpdate/{citas}', [CitasController::class,'update'
 Route::delete('/vistas/Citas/citasDestroy/{citas}',[CitasController::class, 'destroy'])->middleware('auth');
 
 
-
-Route::get('/recetas', [InicioController::class, 'recetas'])->name('recetas')->middleware('auth');
+// RECETAS CRUD
+Route::get('/vistas/Recetas/recetasShow', [RecetaController::class,'index'])->middleware('auth');
+Route::get('/vistas/Recetas/recetasCreate', [RecetaController::class,'create'])->middleware('auth');
+Route::post('/vistas/Recetas/recetasStore', [RecetaController::class,'store'])->middleware('auth');
+Route::get('/vistas/Recetas/recetasEdit/{recetas}', [RecetaController::class,'edit'])->middleware('auth');
+Route::put('/vistas/Recetas/recetasUpdate/{recetas}', [RecetaController::class,'update'])->middleware('auth');
+Route::delete('/vistas/Recetas/recetasDestroy/{recetas}',[RecetaController::class, 'destroy'])->middleware('auth');
+Route::get('/vistas/Recetas/recetasfind/{id}', [RecetaController::class, 'find']);
 
 // Pacientes CRUD
 Route::get('/vistas/Pacientes/pacientesShow', [PacientesController::class,'index'])->middleware('auth');
@@ -53,6 +68,7 @@ Route::post('/vistas/Pacientes/pacientesStore', [PacientesController::class,'sto
 Route::get('/vistas/Pacientes/pacientesEdit/{pacientes}', [PacientesController::class,'edit'])->middleware('auth');
 Route::put('/vistas/Pacientes/pacientesUpdate/{pacientes}', [PacientesController::class,'update'])->middleware('auth');
 Route::delete('/vistas/Pacientes/pacientesDestroy/{pacientes}',[PacientesController::class, 'destroy'])->middleware('auth');
+
 
 
 

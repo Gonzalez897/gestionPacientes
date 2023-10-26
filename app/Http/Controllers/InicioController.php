@@ -19,10 +19,15 @@ class InicioController extends Controller
 
 
     // DOCTORES
-
-    public function doctores() {
-        return view('vistas/doctoresView');
+    public function doctoresShow() {
+        return view('/vistas/Doctores/doctoresShow');
     }
+    
+    public function doctoresUpdate() {
+        return view('/vistas/Doctores/doctoresUpdate');
+    }
+
+
 
     // CITAS
     public function citasCreate() {
@@ -40,8 +45,14 @@ class InicioController extends Controller
 
 
     // RECETAS
-    public function recetas() {
-        return view('vistas/recetasView');
+    public function recetasCreate() {
+        return view('/vistas/Recetas/recetasCreate');
+    }
+    public function recetasShow() {
+        return view('/vistas/Recetas/recetasShow');
+    }
+    public function recetasUpdate() {
+        return view('/vistas/Recetas/recetasUpdate');
     }
 
 

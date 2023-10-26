@@ -66,20 +66,25 @@
                     <a class="nav-link" href="/consultas"><span class="links">Consultas</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/doctores"><span class="links">Doctores</span></a>
+                    <a class="nav-link" href="/vistas/Doctores/doctoresShow"><span class="links">Doctores</span></a>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-light" href="#" role="button"
-                        data-bs-toggle="dropdown"><span class="links">citas</span></a>
+                        data-bs-toggle="dropdown"><span class="links">Citas</span></a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/vistas/Citas/citasCreate">Crear Citas</a></li>
                         <li><a class="dropdown-item" href="/vistas/Citas/citasShow">Ver Citas Creadas</a></li>
                     </ul>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="/recetas"><span class="links">recetas</span></a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                        data-bs-toggle="dropdown"><span class="links">Recetas</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/vistas/Recetas/recetasCreate">Crear Recetas</a></li>
+                        <li><a class="dropdown-item" href="/vistas/Recetas/recetasShow">Ver Recetas Creadas</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-light" href="#" role="button"

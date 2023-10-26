@@ -48,7 +48,7 @@
     <tr>
         <td>{{$item->nombre_paciente}}</td>
         <td>{{$item->apellido_paciene}}</td>
-        <td>{{$item->dui}}</td>
+        <td>{{$item->dui_paciente}}</td>
         <td>{{$item->edad_paciente}}</td>
         <td>
             <a href="/vistas/Pacientes/pacientesEdit/{{$item->idPacientes}}" class="btn btn-danger btn-sm">Modificar</a>

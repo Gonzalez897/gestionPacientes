@@ -28,7 +28,6 @@
     }
     
 </style>
-<div>
     <h2>
         <b>Cosulta de citas</b>
     </h2>

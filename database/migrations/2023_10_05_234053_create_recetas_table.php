@@ -14,7 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('recetas', function (Blueprint $table) {
-            $table->id();
+            $table->id('idRecetas');
+            $table->string('tipo_receta');
+            $table->string('descripcion_tratamiento');
+            $table->unsignedBigInteger('idConsultas');
+            $table->foreign('idConsultas')->references('idConsultas')->on('consultas')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
