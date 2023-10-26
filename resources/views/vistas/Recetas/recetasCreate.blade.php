@@ -79,12 +79,12 @@
                         </div>
                         
 
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label class="form-label"><b>Diagnostico</b></label>
                             <input type="text" class="form-control" name="tipo_receta" value="{{ old('tipo_receta') }}">
                         </div>
                         
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label class="form-label"><b>Descripcion tratamiento</b></label>
                             <input type="text-tarea" class="form-control" name="descripcion_tratamiento" value="{{ old('descripcion_tratamiento') }}">
                         </div>

@@ -6,32 +6,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('titulo')</title>
     <style>
-        #div1 {
-            background-color: #def8f9;
+        body {
+            font-family: "Lato", sans-serif;
         }
 
-        #barraNavegacion {
-            background-color: #2596be;
-            justify-content: left;
+        /* Fixed sidenav, full height */
+        .sidenav {
+            height: 100%;
+            width: 200px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: darkslateblue;
+            overflow-x: hidden;
+            padding-top: 20px;
         }
 
-        .links {
+        /* Style the sidenav links and the dropdown button */
+        .sidenav a,
+        .dropdown-btn {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 20px;
             color: white;
-            padding: 15px;
+            display: block;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            outline: none;
         }
 
-        .links:hover {
-            padding: 15px;
-            background-color: gray;
-            border-radius: 15px;
+        /* On mouse-over */
+        .sidenav a:hover,
+        .dropdown-btn:hover {
+            color: #ffffff;
+        }
+
+        /* Main content */
+        .main {
+            margin-left: 200px;
+            /* Same as the width of the sidenav */
+            font-size: 17px;
+            /* Increased text to enable scrolling */
+            padding: 0px 10px;
+        }
+
+        /* Add an active class to the active dropdown button */
+        .active {
+            background-color: black;
+            color: white;
+        }
+
+        /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+        .dropdown-container {
+            display: none;
+            background-color: darkslateblue;
+            padding-left: 8px;
+        }
+
+        /* Optional: Style the caret down icon */
+        .fa-caret-down {
+            float: right;
+            padding-right: 8px;
+        }
+
+        /* Some media queries for responsiveness */
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+            .sidenav a {
+                font-size: 18px;
+            }
         }
     </style>
 
     {{-- fonts --}}
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
     <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
@@ -44,174 +104,105 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
-<body style="background-color: #3140ac">
-
-    <nav class="navbar navbar-expand-sm" id="barraNavegacion">
+<body style="background-color: rgb(0, 0, 0)">
+    <!-- The sidebar -->
+    <div class="sidebar sidenav">
         <!-- Brand/logo -->
-        <a class="navbar-brand" href="/" style="margin-left: 15px">
-            <img src="{{ asset('imagenesSistema/imagenEmpresa3.jpg') }}" alt="logo" style="width: 60px;">
+        <a href="/" style="margin: auto">
+            <img src="{{ asset('imagenesSistema/imagenEmpresa3.jpg') }}" alt="logo" style="width: 100px;">
         </a>
+        @guest
+            <a class="nav-link" href="/usersIngreso"> <i class="fa fa-solid fa-user"></i>&nbsp<span class="links">Registro
+                    de usuarios</span></a>
+        @else
+            <a class="nav-link" href="/"> <i class="fa fa-solid fa-house"></i>&nbsp<span
+                    class="links">Inicio</span></a>
+            <a class="nav-link" href="/vistas/Doctores/doctoresShow"><i class="fa fa-solid fa-user-doctor"></i><span
+                    class="links">Doctores</span></a>
 
-        <!-- Links -->
-        <ul class="navbar-nav ms-auto">
-            @guest
-                <li class="nav-item">
-                    <a class="nav-link" href="/usersIngreso"><span class="links">Ingreso de usuarios</span></a>
-                </li>
-            @else
-                @if (Auth::user()->estado == 'Doctor')
-                    <li class="nav-item">
-                        <a class="nav-link" href="/"><span class="links">Inicio</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/consultas"><span class="links">Consultas</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/vistas/Doctores/doctoresShow"><span class="links">Doctores</span></a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-light" href="#" role="button"
-                            data-bs-toggle="dropdown"><span class="links">Citas</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/vistas/Citas/citasCreate">Crear Citas</a></li>
-                            <li><a class="dropdown-item" href="/vistas/Citas/citasShow">Ver Citas Creadas</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-light" href="#" role="button"
-                            data-bs-toggle="dropdown"><span class="links">Recetas</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/vistas/Recetas/recetasCreate">Crear Recetas</a></li>
-                            <li><a class="dropdown-item" href="/vistas/Recetas/recetasShow">Ver Recetas Creadas</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-light" href="#" role="button"
-                            data-bs-toggle="dropdown"><span class="links">Pacientes</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/vistas/Pacientes/pacientesCreate">Ingresar Pacientes</a>
-                            </li>
-                            <li><a class="dropdown-item" href="/vistas/Pacientes/pacientesShow">Ver Pacientes Ingresados</a>
-                            </li>
-                        </ul>
-                    </li>
-                @endif
+            <button class="dropdown-btn">Consultas
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a class="dropdown-item" href="/vistas/Consultas/consultasCreate">Crear Consultas</a>
+                <a class="dropdown-item" href="/vistas/Consultas/consultasShow">Ver Consultas Creadas</a>
+            </div>
 
-                @if (Auth::user()->estado == 'Secretaria')
-                    <li class="nav-item">
-                        <a class="nav-link" href="/"><span class="links">Inicio</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/consultas"><span class="links">Consultas</span></a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-light" href="#" role="button"
-                            data-bs-toggle="dropdown"><span class="links">Citas</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/vistas/Citas/citasCreate">Crear Citas</a></li>
-                            <li><a class="dropdown-item" href="/vistas/Citas/citasShow">Ver Citas Creadas</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-light" href="#" role="button"
-                            data-bs-toggle="dropdown"><span class="links">Pacientes</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/vistas/Pacientes/pacientesCreate">Ingresar Pacientes</a>
-                            </li>
-                            <li><a class="dropdown-item" href="/vistas/Pacientes/pacientesShow">Ver Pacientes
-                                    Ingresados</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/vistas/Doctores/doctoresShow"><span class="links">Doctores</span></a>
-                    </li>
-                @endif
+            <button class="dropdown-btn">Citas
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a class="dropdown-item" href="/vistas/Citas/citasCreate">Crear Citas</a>
+                <a class="dropdown-item" href="/vistas/Citas/citasShow">Ver Citas Creadas</a>
+            </div>
 
-                @if (Auth::user()->estado == 'Empleado')
-                    <li class="nav-item">
-                        <a class="nav-link" href="/vistas/Doctores/doctoresShow"><span class="links">Doctores</span></a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-light" href="#" role="button"
-                            data-bs-toggle="dropdown"><span class="links">Empleados</span></a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="/consultaEmpleados">Consultar empleados</a></li>
-                        </ul>
-                    </li>
-                @endif
+            <button class="dropdown-btn">Recetas
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a class="dropdown-item" href="/vistas/Recetas/recetasCreate">Crear Recetas</a>
+                <a class="dropdown-item" href="/vistas/Recetas/recetasShow">Ver Recetas Creadas</a>
+            </div>
 
-                @if (Auth::user()->estado == 'superusuario')
-                    <li class="nav-item">
-                        <a class="nav-link" href="/"><span class="links">Inicio</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/consultas"><span class="links">Consultas</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/vistas/Doctores/doctoresShow"><span class="links">Doctores</span></a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-light" href="#" role="button"
-                            data-bs-toggle="dropdown"><span class="links">Citas</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/vistas/Citas/citasCreate">Crear Citas</a></li>
-                            <li><a class="dropdown-item" href="/vistas/Citas/citasShow">Ver Citas Creadas</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-light" href="#" role="button"
-                            data-bs-toggle="dropdown"><span class="links">Recetas</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/vistas/Recetas/recetasCreate">Crear Recetas</a></li>
-                            <li><a class="dropdown-item" href="/vistas/Recetas/recetasShow">Ver Recetas Creadas</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-light" href="#" role="button"
-                            data-bs-toggle="dropdown"><span class="links">Pacientes</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/vistas/Pacientes/pacientesCreate">Ingresar Pacientes</a>
-                            </li>
-                            <li><a class="dropdown-item" href="/vistas/Pacientes/pacientesShow">Ver Pacientes
-                                    Ingresados</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-light" href="#" role="button"
-                            data-bs-toggle="dropdown"><span class="links">Empleados</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/formEmpleado">Ingresar empleados</a></li>
-                            <li><a class="dropdown-item" href="/consultaEmpleados">Consultar empleados</a></li>
-                        </ul>
-                    </li>
-                @endif
+            <button class="dropdown-btn">Pacientes
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a class="dropdown-item" href="/vistas/Pacientes/pacientesCreate">Ingresar Pacientes</a>
+                <a class="dropdown-item" href="/vistas/Pacientes/pacientesShow">Ver Pacientes Ingresados</a>
+            </div>
 
-                <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle text-light" href="#" role="button"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        <span class="links">{{ Auth::user()->name }}</span>
-                    </a>
+            <button class="dropdown-btn">Empleados
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a class="dropdown-item" href="/formEmpleado">Ingresar empleados</a>
+                <a class="dropdown-item" href="/consultaEmpleados">Consultar empleados</a>
+            </div>
 
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
+            <button class="dropdown-btn">{{ Auth::user()->name }}
+                <i class="fa fa-solid fa-user"></i>
+            </button>
+            <div class="dropdown-container">
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
-                            Cerrar Sesion
-                        </a>
+                    Cerrar Sesion
+                </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </div>
-                </li>
-            @endguest
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </div>
+            </li>
+        @endguest
         </ul>
-    </nav>
+
+    </div>
+
+
     <br>
-    @yield('contenido')
+    <div class="content main">
+        @yield('contenido')
+    </div>
     @yield('scripts')
+    <script>
+        /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

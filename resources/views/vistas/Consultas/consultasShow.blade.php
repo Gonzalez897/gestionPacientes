@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('titulo', 'Citas')
+@section('titulo', 'Consultas')
 
 @section('contenido')
     <style scoped>
@@ -34,29 +34,31 @@
                 <table id="tablaCitas" class="table table-hover table-bordered table-dark table-striped mt-2">
                     <thead>
                         <tr>
-                            <td>Motivo de la cita</td>
-                            <td>Fecha de la cita</td>
-                            <td>Nombre Paciente</td>
-                            <td>Nombre Doctor</td>
+                            <td>Nombre de la consulta</td>
+                            <td>Descripcion de sintomas</td>
+                            <td>Fecha de la consulta</td>
+                            <td>Nombre y Apellido del Paciente</td>
+                            <td>Nombre y Apellido del Doctor</td>
                             <td>Especializacion</td>
                             <td>Fecha de creacion</td>
                             <td>Acciones</td>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($citas as $item)
+                        @foreach ($consultas as $item)
                             <tr>
-                                <td>{{ $item->motivo }}</td>
-                                <td>{{ $item->fecha_cita }}</td>
-                                <td>{{ $item->NombreP }} {{ $item->ApellidoP }}</td>
-                                <td>{{ $item->Doctor }} {{ $item->DoctorA }}</td>
-                                <td>{{ $item->Especializacion }}</td>
+                                <td>{{ $item->nombre_consultas }}</td>
+                                <td>{{ $item->descripcion }}</td>
+                                <td>{{ $item->f_consulta }} {{ $item->ApellidoP }}</td>
+                                <td>{{ $item->nombre_paciente }} {{ $item->apellido_paciene }}</td>
+                                <td>{{ $item->nombre }} {{ $item->apellido }}</td>
+                                <td>{{ $item->especializacion }}</td>
                                 <td>{{ $item->created_at }}</td>
                                 <td>
-                                    <a href="/vistas/Citas/citasEdit/{{ $item->idCitas }}"
+                                    <a href="/vistas/Consultas/consultasEdit/{{ $item->idConsultas }}"
                                         class="btn btn-danger btn-sm">Modificar</a>
                                     <button class="btn btn-danger btn-sm"
-                                        url="/vistas/Citas/citasDestroy/{{ $item->idCitas }}" onclick="eliminar(this)"
+                                        url="/vistas/Consultas/consultasDestroy/{{ $item->idConsultas }}" onclick="eliminar(this)"
                                         token="{{ csrf_token() }}">Eliminar</button>
                                 </td>
                             </tr>

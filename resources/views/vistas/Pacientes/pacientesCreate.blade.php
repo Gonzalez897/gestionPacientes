@@ -40,17 +40,17 @@
                     <form action="/vistas/Pacientes/pacientesStore" method="post" class="row g-3 needs-validation">
                         @csrf
 
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label class="form-label"><b>Nombre Paciente</b></label>
                             <input type="text" class="form-control" name="nombre_paciente" placeholder="Nombre">
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label class="form-label"><b>Apellido Paciente</b></label>
                             <input type="text" class="form-control" name="apellido_paciene" placeholder="Apellido">
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label for="validationCustomUsername" class="form-label"><b>Numero de DUI</b></label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text">N</span>
@@ -58,12 +58,11 @@
                             </div>
                         </div>
 
-                      <center>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label class="form-label"><b>Edad Paciente</b></label>
                             <input type="number" class="form-control" name="edad_paciente" placeholder="Edad">
                         </div>
-                      </center>
+                        
                         <div class="col-12">
                             <button class="btn btn-primary" type="submit">Ingresar Paciente</button>
                         </div>

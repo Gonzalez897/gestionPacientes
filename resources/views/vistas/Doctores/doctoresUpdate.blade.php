@@ -21,6 +21,7 @@
         #btn {
             text-align: center;
         }
+        
     </style>
     <h2>
         Actualizacion de doctores

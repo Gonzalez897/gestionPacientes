@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('titulo', 'consulta empleados')
+@section('titulo', 'Empleados')
 
 @section('contenido')
 
@@ -68,7 +68,7 @@
     <style scoped>
         h3 {
             padding: 10px;
-            background-color: cornflowerblue;
+            background-color: darkslateblue;
             color: white;
             width: 35%;
             margin: 0px auto;

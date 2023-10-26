@@ -3,79 +3,79 @@
 @section('titulo', 'Inicio')
 
 @section('contenido')
-<style scoped>
-    h2 {
-        text-align: center;
-        color: white
-    }
+    <style scoped>
+        * {
+            box-sizing: border-box;
+        }
 
-    img {
-        width: 25%;
-    }
+        body {
+            font-family: Arial;
+            font-size: 17px;
+        }
 
-    p{
-        font-family: Verdana, Tahoma, sans-serif;
-        color: white;
+        .container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-    }
+        .container img {
+            vertical-align: middle;
+        }
 
-    .pvision{
-        text-align: center;
-    }
-    
-    .pmision{
-        text-align: center;
-    }
+        .container .content {
+            position: absolute;
+            bottom: 0;
+            background: rgb(0, 0, 0);
+            /* Fallback color */
+            background: rgba(0, 0, 0, 0.5);
+            /* Black background with 0.5 opacity */
+            color: #f1f1f1;
+            width: 100%;
+            height: 80%;
+            padding: 20px;
+        }
 
-    .Pvalores{
-        text-align: center;
-    }
-</style>
-<h2>
-    Sistema de gestion pacientes.
-</h2>
-<br>
-<div align="center">
-    <img src="{{ asset('imagenesSistema/imagenEmpresa2.jpg') }}" alt="">
-</div>
-<br><br>
-<div class="pvision p-3">
-    <p>vision:</p>
-    <br>
-    <p>
-        Ser la empresa de desarrollo de software más confiable <br>
-        y reconocida a nivel Nacional. <br>
-        Nuestra visión es liderar la revolución tecnológica,<br>
-         ofreciendo soluciones de software de vanguardia <br> 
-        que transformen la forma en que las empresas <br>
-         y las personas interactúan con la tecnología.
-    </p>
-</div>
-<br>
-<div class="pmision p-3">
-    <p>mision:</p>
-    <br>
-    <p>Como empresa tenemos como misión brindar un servicio de sistemas de software <br>
-        en sectores en los que detectemos una necesidad puntual <br>
-        y llegar a ser reconocidos en distintos mercados <br>
-        o por diferentes empresas gracias a nuestros servicios <br>
-         de software para diferentes índoles.</p>
-</div>
-<br>
+        p.left {
+            text-align: left;
+            font-weight: bold;
+            line-height: 75%;
+        };
+    </style>
+    <div class="container">
+        <img src="{{ asset('imagenesSistema/imagenEmpresa2.jpg') }}" alt="Notebook" style="width:100%;">
+        <div class="content">
+            <h1>Gestion pacientes.</h1>
+            <p>vision:
 
-<div class="Pvalores p-3">
-    <p>valores de la empresa:</p>
-    <br>
-    <p>
-      1- Confidencialidad.<br>
-      2- Responsabilidad<br>
-      3- honestidad y etica profesional<br>
-      4- Trabajo en equipo<br>
-      5- Compromiso<br>
-      6- Transparencia<br>
-      7- Pasion<br>
-      8- Eficasia<br>
-      9- Innovacion<br>
-    </p>
-</div>
+                Ser la empresa de desarrollo de software más confiable
+                y reconocida a nivel Nacional.
+                Nuestra visión es liderar la revolución tecnológica,
+                ofreciendo soluciones de software de vanguardia
+                que transformen la forma en que las empresas
+                y las personas interactúan con la tecnología.
+            </p>
+            <br>
+            <p>mision:
+                Como empresa tenemos como misión brindar un servicio de sistemas de software
+                en sectores en los que detectemos una necesidad puntual
+                y llegar a ser reconocidos en distintos mercados
+                o por diferentes empresas gracias a nuestros servicios
+                de software para diferentes índoles.
+            </p>
+            <br>
+
+            <p>valores de la empresa:
+                1- Confidencialidad.<br>
+                2- Responsabilidad<br>
+                3- honestidad y etica profesional<br>
+                4- Trabajo en equipo<br>
+                5- Compromiso<br>
+                6- Transparencia<br>
+                7- Pasion<br>
+                8- Eficasia<br>
+                9- Innovacion<br>
+            </p>
+        </div>
+    </div>
 @endSection

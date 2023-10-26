@@ -42,13 +42,13 @@
                         @csrf
 
 
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label class="form-label"><b>Motivo</b></label>
                             <input type="text-tarea" class="form-control" name="motivo" value="{{ old('motivo') }}"
                                 placeholder="Digite el motivo">
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label class="form-label"><b>Fecha de la cita</b></label>
                             <div class="input-group has-validation">
                                 <input type="date" class="form-control" name="fecha_cita"

@@ -10,6 +10,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\RecetaController;
 use App\Http\Controllers\DoctoresController;
+use App\Http\Controllers\ConsultasController;
 use App\Http\Controllers\PacientesController;
 
 /*
@@ -53,7 +54,14 @@ Route::delete('/empleado/empleadoDelete/{empleado}', [LoginController::class, 'e
 
 Route::get('/', [InicioController::class,'inicio'])->middleware('auth');
 
-Route::get('/consultas', [InicioController::class, 'consultas'])->name('consultas')->middleware('auth');
+
+// CONSULTAS CRUD
+Route::get('/vistas/Consultas/consultasShow', [ConsultasController::class,'index'])->middleware('auth');
+Route::get('/vistas/Consultas/consultasCreate', [ConsultasController::class,'create'])->middleware('auth');
+Route::post('/vistas/Consultas/consultasStore', [ConsultasController::class,'store'])->middleware('auth');
+Route::get('/vistas/Consultas/consultasEdit/{consultas}', [ConsultasController::class,'edit'])->middleware('auth');
+Route::put('/vistas/Consultas/consultasUpdate/{consultas}', [ConsultasController::class,'update'])->middleware('auth');
+Route::delete('/vistas/Consultas/consultasDestroy/{consultas}',[ConsultasController::class, 'destroy'])->middleware('auth');
 
 
 // DOCTORES CRUD
