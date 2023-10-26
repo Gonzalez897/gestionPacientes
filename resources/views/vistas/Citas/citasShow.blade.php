@@ -35,7 +35,6 @@
     <table id="tablaCitas" class="table table-hover table-bordered table-dark table-striped mt-2">
         <thead>
         <tr>
-            <td>ID</td>
             <td>Motivo de la cita</td>
             <td>Fecha de la cita</td>
             <td>Nombre Paciente</td>
@@ -48,7 +47,6 @@
     <tbody>
     @foreach ($citas as $item)
     <tr>
-        <td>{{$item->idCitas}}</td>
         <td>{{$item->motivo}}</td>
         <td>{{$item->fecha_cita}}</td>
         <td>{{$item->NombreP}} {{$item->ApellidoP}}</td>

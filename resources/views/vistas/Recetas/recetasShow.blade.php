@@ -39,7 +39,6 @@
             <table id="tablaCitas" class="table table-hover table-bordered table-dark table-striped mt-2">
                 <thead>
                 <tr>
-                    <td>ID</td>
                     <td>Nombre del doctor</td>
                     <td>Nombre del paciente</td>
                     <td>Edad del paciente</td>
@@ -52,7 +51,6 @@
             <tbody>
             @foreach ($recetas as $item)
             <tr>
-                <td>{{$item->idRecetas}}</td>
                 <td>{{$item->Doctor}}</td>
                 <td>{{$item->NombrePaciente}}</td>
                 <td>{{$item->edadPaciente}}</td>

@@ -26,7 +26,6 @@
 <table id="tablaCitas" class="table table-hover table-bordered table-dark table-striped mt-2">
     <thead>
     <tr>
-        <td>ID</td>
         <td>Nombre del Doctor</td>
         <td>Apellido del doctor</td>
         <td>Cargo</td>
@@ -39,7 +38,6 @@
 <tbody>
 @foreach ($doctores as $item)
 <tr>
-    <td>{{$item->idDoctores}}</td>
     <td>{{$item->nombreD}}</td>
     <td>{{$item->apellidoD}}</td>
     <td>{{$item->cargo}}</td>
