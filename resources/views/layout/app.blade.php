@@ -140,7 +140,7 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
-<body style="background-color: black">
+<body style="background-color: rgb(54, 52, 52)">
     <!-- The sidebar -->
     <div class="sidebar sidenav">
         <!-- Brand/logo -->
@@ -151,8 +151,15 @@
             <a class="nav-link" href="/usersIngreso"> <i class="fa fa-solid fa-user"></i>&nbsp<span class="links">Registro de usuarios</span></a>
         @else
             <a class="nav-link" href="/"> <i class="fa fa-solid fa-house"></i>&nbsp<span class="links">Inicio</span></a>
-            <a class="nav-link" href="/consultas"><i class=" fa fa-regular fa-circle-user"></i><span class="links">Consultas</span></a>
             <a class="nav-link" href="/vistas/Doctores/doctoresShow"><i class="fa fa-solid fa-user-doctor"></i><span class="links">Doctores</span></a>
+
+            <button class="dropdown-btn">Consultas
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a class="dropdown-item" href="/vistas/Consultas/consultasCreate">Crear Consultas</a>
+                <a class="dropdown-item" href="/vistas/Consultas/consultasShow">Ver Consultas Creadas</a>
+            </div>
 
             <button class="dropdown-btn">Citas
                 <i class="fa fa-caret-down"></i>
