@@ -20,6 +20,7 @@
             padding-top: 10px;
         }
     </style>
+<div class="container-fluid">
     <center>
         <br>
         <!--form-->
@@ -28,10 +29,9 @@
         </h3>
         <br>
     <br>
-    <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-11" id="divTablaEmpleados">
-                <table id="tablaCitas" class="table table-hover table-bordered table-dark table-striped mt-2">
+                <table id="tablaCitas" class="table table-responsive table-hover table-bordered table-dark table-striped mt-2">
                     <thead>
                         <tr>
                             <td>Motivo de la cita</td>
@@ -66,6 +66,7 @@
             </div>
         </div>
     </div>
+</div>
 @endsection
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

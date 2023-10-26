@@ -35,7 +35,7 @@
             border-radius: 15px;
         }
     </style>
-    <div>
+<div class="container-fluid">
         <!--Cuerpo de pagina-->
         <center>
             <br>
@@ -70,5 +70,5 @@
                 </div>
             </div>
         </center>
-
+</div>
     @endsection

@@ -26,6 +26,7 @@
             font-family: 'Courier New', Courier, monospace;
 
         }
+
         h3 {
             padding: 10px;
             background-color: darkslateblue;
@@ -35,14 +36,15 @@
             border-radius: 15px;
         }
     </style>
-    <center>
-        <br>
-        <!--form-->
-        <h3>
-            <b>Ingreso de Citas</b>
-        </h3>
-        <br>
-    <br>
+    <div class="container-fluid">
+        <center>
+            <br>
+            <!--form-->
+            <h3>
+                <b>Ingreso de Citas</b>
+            </h3>
+            <br>
+            <br>
             <!--form-->
             <div class="card" style="width:1000px">
                 <div class="card-body">
@@ -112,5 +114,5 @@
                 </div>
                 </form>
         </center>
-
-    @endsection
+    </div>
+@endsection

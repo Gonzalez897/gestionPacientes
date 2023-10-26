@@ -28,7 +28,7 @@
         .dropdown-btn {
             padding: 6px 8px 6px 16px;
             text-decoration: none;
-            font-size: 18px;
+            font-size: 15px;
             color: white;
             display: block;
             border: none;
@@ -106,7 +106,7 @@
 
 <body style="background-color: rgb(0, 0, 0)">
     <!-- The sidebar -->
-    <div class="sidebar sidenav">
+    <div class="sidebar sidenav ">
         <!-- Brand/logo -->
         <a href="/" style="margin: auto">
             <img src="{{ asset('imagenesSistema/imagenEmpresa3.jpg') }}" alt="logo" style="width: 100px;">

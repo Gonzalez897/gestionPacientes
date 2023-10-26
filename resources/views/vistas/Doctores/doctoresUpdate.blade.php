@@ -30,6 +30,7 @@
             border-radius: 15px;
         }
     </style>
+<div class="container-fluid">
         <center>
             <br>
             <!--form-->
@@ -92,8 +93,10 @@
                         <button class="btn btn-primary" type="submit">Actualizar Doctor</button>
                     </div>
 
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
+        </center>
     </center>
+</div>
 @endsection

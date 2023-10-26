@@ -20,6 +20,7 @@
             padding-top: 10px;
         }
     </style>
+<div class="container-fluid">
         <center>
             <br>
             <!--form-->
@@ -30,7 +31,7 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-11" id="divTablaEmpleados">
-                <table id="tablaPacientes" class="table table-hover table-bordered table-dark table-striped mt-2">
+                <table id="tablaPacientes" class="table table-responsive table-hover table-bordered table-dark table-striped mt-2">
                     <thead>
                         <tr>
                             <td>Nombre del paciente</td>
@@ -61,7 +62,8 @@
             </div>
         </div>
     </div>
-
+        </center>
+</div>
 @endsection
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

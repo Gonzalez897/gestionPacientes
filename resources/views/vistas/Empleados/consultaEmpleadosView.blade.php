@@ -11,7 +11,7 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-11" id="divTablaEmpleados">
-                <table id="empleadosTabla" class="table table-dark">
+                <table id="empleadosTabla" class="table  table-responsive table-dark">
                     <thead>
                         <th>Nombre</th>
                         <th>Apellido</th>

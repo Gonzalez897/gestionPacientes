@@ -35,6 +35,7 @@
             border-radius: 15px;
         }
     </style>
+    <div class="container-fluid">
         <center>
             <br>
             <!--form-->
@@ -127,5 +128,6 @@
                 </div>
                 </form>
         </center>
+    </div>
 
-    @endsection
+@endsection
