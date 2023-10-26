@@ -211,7 +211,6 @@
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-container">
-                    <a class="dropdown-item" href="/vistas/Consultas/consultasCreate">Crear Consultas</a>
                     <a class="dropdown-item" href="/vistas/Consultas/consultasShow">Ver Consultas Creadas</a>
                 </div>
 

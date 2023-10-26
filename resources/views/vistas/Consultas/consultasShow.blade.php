@@ -42,7 +42,9 @@
                             <td>Doctor</td>
                             <td>Especializacion</td>
                             <td>Fecha de creacion</td>
+                            @if (Auth::user()->estado == 'superusuario' || Auth::user()->estado == 'Doctor')
                             <td>Acciones</td>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -55,6 +57,7 @@
                                 <td>{{ $item->Doctor }} {{ $item->DoctorA }}</td>
                                 <td>{{ $item->Especializacion }}</td>
                                 <td>{{ $item->created_at }}</td>
+                                @if (Auth::user()->estado == 'superusuario' || Auth::user()->estado == 'Doctor')
                                 <td>
                                     <a href="/vistas/Consultas/consultasEdit/{{ $item->idConsultas }}"
                                         class="btn btn-primary btn-sm">Modificar</a>
@@ -62,6 +65,7 @@
                                         url="/vistas/Consultas/consultasDestroy/{{ $item->idConsultas }}" onclick="eliminar(this)"
                                         token="{{ csrf_token() }}">Eliminar</button>
                                 </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>
