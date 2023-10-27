@@ -116,7 +116,7 @@ class LoginController extends Controller
             'users.email'
         )
             ->join('users', 'users.id', '=', 'empleados.id')
-            ->where('empleados.idEmpleados', '!=', Auth::id())
+            ->where('users.id', '!=', Auth::id())
             ->get();
 
         return view('vistas/Empleados/consultaEmpleadosView', compact('empleados'));
