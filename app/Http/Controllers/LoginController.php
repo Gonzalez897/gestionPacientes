@@ -147,7 +147,7 @@ class LoginController extends Controller
                 'rol_usuario' => 'required',
                 'nombre_empleado' => 'required',
                 'apellido_empleado' => 'required',
-                'dui_empleado' => 'required',
+                'dui' => 'required|unique:empleados',
                 'cargo_empleado' => 'required',
                 'fecha_nacimiento' => 'required'
             ], [
@@ -156,6 +156,7 @@ class LoginController extends Controller
                 'nombre_empleado.required' => "Se debe ingresar el nombre del empleado",
                 'apellido_empleado.required' => "Se debe ingresar el apellido del empleado",
                 'dui_empleado.required' => "Se debe ingresar el dui del empleado",
+                'dui_empleado.unique' => "Dui ingresado ya existe",
                 'cargo_empleado.required' => "Se debe ingresar la fecha de nacimiento del empleado"
             ]);
 
@@ -164,7 +165,7 @@ class LoginController extends Controller
                 'id' => $campos_datos['id_usuario'],
                 'nombre' => $campos_datos['nombre_empleado'],
                 'apellido' => $campos_datos['apellido_empleado'],
-                'dui' => $campos_datos['dui_empleado'],
+                'dui' => $campos_datos['dui'],
                 'cargo' => $campos_datos['cargo_empleado'],
                 'f_nacimiento' => $campos_datos['fecha_nacimiento']
             ];
@@ -175,6 +176,26 @@ class LoginController extends Controller
             $consulta_usuario->save();
 
             EmpleadoModel::create($datos_empleado);
+
+            $empleado_creado = EmpleadoModel::select('idEmpleados')->from('empleados')
+                ->where('dui', $datos_empleado['dui'])->get();
+
+            if ($campos_datos['cargo_empleado'] == "Doctor") {
+
+                $campos_especializacion = request()->validate([
+                    'especializacion' => 'required'
+                ], [
+                    'especializacion.required' => "Se debe ingresar la especializacion del doctor"
+                ]);
+
+                $datos_doctor = [
+                    'idEmpleados' => $empleado_creado[0]->idEmpleados,
+                    'especializacion' => $campos_especializacion['especializacion'],
+                    'disponibilidad' => "Disponible"
+                ];
+
+                DoctorModel::create($datos_doctor);
+            }
 
             session()->flash('mensaje', "Se ha ingresado al empleado con exito");
 
@@ -188,7 +209,7 @@ class LoginController extends Controller
                 'conf_clave' => 'required|same:clave',
                 'nombre_empleado' => 'required',
                 'apellido_empleado' => 'required',
-                'dui_empleado' => 'required',
+                'dui' => 'required|unique:users',
                 'cargo_empleado' => 'required',
                 'fecha_nacimiento' => 'required'
             ], [
@@ -220,7 +241,7 @@ class LoginController extends Controller
             $datos_empleado = [
                 'nombre' => $campos_datos['nombre_empleado'],
                 'apellido' => $campos_datos['apellido_empleado'],
-                'dui' => $campos_datos['dui_empleado'],
+                'dui' => $campos_datos['dui'],
                 'cargo' => $campos_datos['cargo_empleado'],
                 'f_nacimiento' => $campos_datos['fecha_nacimiento'],
                 'id' => $usuario_creado[0]->id
@@ -240,7 +261,7 @@ class LoginController extends Controller
                 ]);
 
                 $datos_doctor = [
-                    'idEmpleado' => $empleado_creado[0]->idEmpleados,
+                    'idEmpleados' => $empleado_creado[0]->idEmpleados,
                     'especializacion' => $campos_especializacion['especializacion'],
                     'disponibilidad' => "Disponible"
                 ];
@@ -307,7 +328,7 @@ class LoginController extends Controller
             $usuarios = [
                 'name' => $datos['usuario'],
                 'password' => Hash::make($datos['clave']),
-                'estado' => 'empleado',
+                'estado' => 'Empleado',
                 'email' => $datos['email']
             ];
 
@@ -450,13 +471,30 @@ class LoginController extends Controller
 
         if ($campos_empleados['cargo_empleado'] == "Doctor") {
 
+            $consulta_doctor = DoctorModel::select('idEmpleados')->from('doctores')
+                ->where('idEmpleados', $empleado->id)->get();
+
             $datos_doctores = request()->validate([
-                'especialidad' => 'required'
+                'especializacion' => 'required'
+            ], [
+                'especializacion.required' => "Se debe ingresar la especializacion del doctor"
             ]);
 
-            $doctores = DoctorModel::find($empleado->idEmpleados);
-            $doctores->especializacion = $datos_doctores['especialidad'];
-            $doctores->save();
+            if (count($consulta_doctor) > 0) {
+                $doctores = DoctorModel::find($empleado->idEmpleados);
+                $doctores->especializacion = $datos_doctores['especializacion'];
+                $doctores->save();
+            }else{
+
+                $datos_doctor = [
+                    'idEmpleados' => $empleado->id,
+                    'especializacion' => $datos_doctores['especializacion'],
+                    'disponibilidad' => "Disponible"
+                ];
+
+                DoctorModel::create($datos_doctor);
+                
+            }
         }
 
         session()->flash('mensaje', 'Se ha actualizado con exito');

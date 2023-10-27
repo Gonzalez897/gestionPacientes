@@ -100,8 +100,8 @@
                                         </option>
                                     @else
                                     <option value="{{ $valor->idDoctores }}">
-                                        {{ $valor->nombre }}
-                                        {{ $valor->apellido }}
+                                        {{ $valor->nombre }} -
+                                        {{ $valor->disponibilidad }}
                                     </option>
                                     @endif
                                 @endforeach
@@ -109,6 +109,11 @@
                             @error('idDoctores')
                                 <span class="invalid-feedback d-block" role="alert">
                                     <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            @if(session('doctorDisponible'))
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ session('doctorDisponible') }}</strong>
                                 </span>
                             @enderror
                         </div>

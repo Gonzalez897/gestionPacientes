@@ -220,14 +220,14 @@
                                                     especialidad</span><br>
                                                 <span class="h5">especialidad</span>
                                                 <br>
-                                                @if (old('especialidad'))
-                                                    <input class="form-control" type="text" name="especialidad"
-                                                        value="{{ old('especialidadUpdate') }}">
+                                                @if (old('especializacion'))
+                                                    <input class="form-control" type="text" name="especializacion"
+                                                        value="{{ old('especializacion') }}">
                                                 @else
-                                                    <input class="form-control" type="text" name="especialidad"
+                                                    <input class="form-control" type="text" name="especializacion"
                                                         value="{{ $empleado_datos[0]->especializacion }}">
                                                 @endif
-                                                @error('especialidad')
+                                                @error('especializacion')
                                                     <span class="invalid-feedback d-block" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
