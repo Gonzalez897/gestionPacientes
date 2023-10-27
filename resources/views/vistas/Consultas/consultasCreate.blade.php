@@ -26,15 +26,24 @@
             font-family: 'Courier New', Courier, monospace;
 
         }
+        h3 {
+            padding: 10px;
+            background-color: darkslateblue;
+            color: white;
+            width: 35%;
+            margin: 0px auto;
+            border-radius: 15px;
+        }
     </style>
-    <div>
-        <h2>
-            <b>Ingreso de consultas</b>
-        </h2>
-
-        <!--Cuerpo de pagina-->
+    <div class="container-fluid">
         <center>
             <br>
+            <!--form-->
+            <h3>
+                <b>Ingreso de consultas</b>
+            </h3>
+            <br>
+        <br>
             <!--form-->
             <div class="card" style="width:1000px">
                 <div class="card-body">
@@ -119,5 +128,6 @@
                 </div>
                 </form>
         </center>
+    </div>
 
-    @endsection
+@endsection

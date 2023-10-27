@@ -20,18 +20,18 @@
             padding-top: 10px;
         }
     </style>
+<div class="container-fluid">
     <center>
         <br>
         <!--form-->
         <h3>
-            <b>Consulta de Citas</b>
+            <b>Listados de Citas</b>
         </h3>
         <br>
     <br>
-    <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-11" id="divTablaEmpleados">
-                <table id="tablaCitas" class="table table-hover table-bordered table-dark table-striped mt-2">
+                <table id="tablaCitas" class="table table-responsive table-hover table-bordered table-dark table-striped mt-2">
                     <thead>
                         <tr>
                             <td>Motivo de la cita</td>
@@ -54,7 +54,7 @@
                                 <td>{{ $item->created_at }}</td>
                                 <td>
                                     <a href="/vistas/Citas/citasEdit/{{ $item->idCitas }}"
-                                        class="btn btn-danger btn-sm">Modificar</a>
+                                        class="btn btn-primary btn-sm">Modificar</a>
                                     <button class="btn btn-danger btn-sm"
                                         url="/vistas/Citas/citasDestroy/{{ $item->idCitas }}" onclick="eliminar(this)"
                                         token="{{ csrf_token() }}">Eliminar</button>
@@ -66,6 +66,7 @@
             </div>
         </div>
     </div>
+</div>
 @endsection
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

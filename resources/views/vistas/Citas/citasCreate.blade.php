@@ -26,14 +26,24 @@
             font-family: 'Courier New', Courier, monospace;
 
         }
-    </style>
-    <div>
-        <h2>
-            <b>Ingreso de citas</b>
-        </h2>
 
-        <!--Cuerpo de pagina-->
+        h3 {
+            padding: 10px;
+            background-color: darkslateblue;
+            color: white;
+            width: 35%;
+            margin: 0px auto;
+            border-radius: 15px;
+        }
+    </style>
+    <div class="container-fluid">
         <center>
+            <br>
+            <!--form-->
+            <h3>
+                <b>Ingreso de Citas</b>
+            </h3>
+            <br>
             <br>
             <!--form-->
             <div class="card" style="width:1000px">
@@ -104,5 +114,5 @@
                 </div>
                 </form>
         </center>
-
-    @endsection
+    </div>
+@endsection

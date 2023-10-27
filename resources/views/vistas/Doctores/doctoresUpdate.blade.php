@@ -21,11 +21,24 @@
         #btn {
             text-align: center;
         }
-        
+        h3 {
+            padding: 10px;
+            background-color: darkslateblue;
+            color: white;
+            width: 35%;
+            margin: 0px auto;
+            border-radius: 15px;
+        }
     </style>
-    <h2>
-        Actualizacion de doctores
-    </h2>
+<div class="container-fluid">
+        <center>
+            <br>
+            <!--form-->
+            <h3>
+                <b>Actualizar Doctor</b>
+            </h3>
+            <br>
+    
     <center>
         <div class="card" style="width:1000px">
             <div class="card-body">
@@ -80,8 +93,10 @@
                         <button class="btn btn-primary" type="submit">Actualizar Doctor</button>
                     </div>
 
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
+        </center>
     </center>
+</div>
 @endsection

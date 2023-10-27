@@ -20,18 +20,19 @@
             padding-top: 10px;
         }
     </style>
+<div class="container-fluid">
         <!--Cuerpo de pagina-->
         <center>
             <br>
             <!--form-->
             <h3>
-                <b>Consulta de Recetas</b>
+                <b>Listado de Recetas</b>
             </h3>
             <br>
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-11" id="divTablaEmpleados">
-                        <table id="tablaCitas" class="table table-hover table-bordered table-dark table-striped mt-2">
+                        <table id="tablaRecetas" class="table table-responsive table-hover table-bordered table-dark table-striped mt-2">
                             <thead>
                                 <tr>
                                     <td>Nombre del doctor</td>
@@ -54,7 +55,7 @@
                                         <td>{{ $item->created_at }}</td>
                                         <td>
                                             <a href="/vistas/Recetas/recetasEdit/{{ $item->idRecetas }}"
-                                                class="btn btn-danger btn-sm">Modificar</a>
+                                                class="btn btn-primary btn-sm">Modificar</a>
                                             <button class="btn btn-danger btn-sm"
                                                 url="/vistas/Recetas/recetasDestroy/{{ $item->idRecetas }}"
                                                 onclick="eliminar(this)" token="{{ csrf_token() }}">Eliminar</button>
@@ -67,7 +68,7 @@
                 </div>
             </div>
         </center>
-
+</div>
     @endsection
 
     @section('scripts')

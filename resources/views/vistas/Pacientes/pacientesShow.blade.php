@@ -20,17 +20,18 @@
             padding-top: 10px;
         }
     </style>
+<div class="container-fluid">
         <center>
             <br>
             <!--form-->
             <h3>
-                <b>Consulta de Pacientes</b>
+                <b>Listado de Pacientes</b>
             </h3>
             <br>
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-11" id="divTablaEmpleados">
-                <table id="tablaPacientes" class="table table-hover table-bordered table-dark table-striped mt-2">
+                <table id="tablaPacientes" class="table table-responsive table-hover table-bordered table-dark table-striped mt-2">
                     <thead>
                         <tr>
                             <td>Nombre del paciente</td>
@@ -49,7 +50,7 @@
                                 <td>{{ $item->edad_paciente }}</td>
                                 <td>
                                     <a href="/vistas/Pacientes/pacientesEdit/{{ $item->idPacientes }}"
-                                        class="btn btn-danger btn-sm">Modificar</a>
+                                        class="btn btn-primary btn-sm">Modificar</a>
                                     <button class="btn btn-danger btn-sm"
                                         url="/vistas/Pacientes/pacientesDestroy/{{ $item->idPacientes }}"
                                         onclick="eliminar(this)" token="{{ csrf_token() }}">Eliminar</button>
@@ -61,7 +62,8 @@
             </div>
         </div>
     </div>
-
+        </center>
+</div>
 @endsection
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

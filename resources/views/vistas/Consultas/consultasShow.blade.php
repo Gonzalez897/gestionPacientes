@@ -20,18 +20,19 @@
             padding-top: 10px;
         }
     </style>
+<div class="container-fluid">
     <center>
         <br>
         <!--form-->
         <h3>
-            <b>Consulta de Citas</b>
+            <b>Listado de consultas</b>
         </h3>
         <br>
     <br>
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-11" id="divTablaEmpleados">
-                <table id="tablaCitas" class="table table-hover table-bordered table-dark table-striped mt-2">
+                <table id="tablaConsultas" class="table table-responsive table-hover table-bordered table-dark table-striped mt-2">
                     <thead>
                         <tr>
                             <td>Nombre de la consulta</td>
@@ -56,7 +57,7 @@
                                 <td>{{ $item->created_at }}</td>
                                 <td>
                                     <a href="/vistas/Consultas/consultasEdit/{{ $item->idConsultas }}"
-                                        class="btn btn-danger btn-sm">Modificar</a>
+                                        class="btn btn-primary btn-sm">Modificar</a>
                                     <button class="btn btn-danger btn-sm"
                                         url="/vistas/Consultas/consultasDestroy/{{ $item->idConsultas }}" onclick="eliminar(this)"
                                         token="{{ csrf_token() }}">Eliminar</button>
@@ -68,6 +69,8 @@
             </div>
         </div>
     </div>
+</center>
+</div>
 @endsection
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

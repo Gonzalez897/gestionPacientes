@@ -26,16 +26,24 @@
             font-family: 'Courier New', Courier, monospace;
 
         }
+        h3 {
+            padding: 10px;
+            background-color: darkslateblue;
+            color: white;
+            width: 35%;
+            margin: 0px auto;
+            border-radius: 15px;
+        }
     </style>
-    <div>
-        <h2>
-            <b>Ingreso de Recetas</b>
-        </h2>
-
-        <!--Cuerpo de pagina-->
-        <center>
-            <br>
-            <!--form-->
+<div class="container-fluid">
+<center>
+    <br>
+    <!--form-->
+    <h3>
+        <b>Ingresar Recetas</b>
+    </h3>
+    <br>
+           <!--form-->
             <div class="card" style="width:1000px">
                 <div class="card-body">
                     <form action="/vistas/Recetas/recetasStore" method="post" class="row g-3 needs-validation">
@@ -98,7 +106,7 @@
             </div>
                 
         </center>
-
+</div>
     @endsection
 
 @section('scripts')
