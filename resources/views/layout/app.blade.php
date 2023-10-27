@@ -115,50 +115,127 @@
             <a class="nav-link" href="/usersIngreso"> <i class="fa fa-solid fa-user"></i>&nbsp<span class="links">Registro
                     de usuarios</span></a>
         @else
-            <a class="nav-link" href="/"> <i class="fa fa-solid fa-house"></i>&nbsp<span
-                    class="links">Inicio</span></a>
-            <a class="nav-link" href="/vistas/Doctores/doctoresShow"><i class="fa fa-solid fa-user-doctor"></i><span
-                    class="links">Doctores</span></a>
+            @if (Auth::user()->estado == 'superusuario')
+                <a class="nav-link" href="/"> <i class="fa fa-solid fa-house"></i>&nbsp<span
+                        class="links">Inicio</span></a>
+                <a class="nav-link" href="/vistas/Doctores/doctoresShow"><i class="fa fa-solid fa-user-doctor"></i><span
+                        class="links">Doctores</span></a>
 
-            <button class="dropdown-btn">Consultas
-                <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-container">
-                <a class="dropdown-item" href="/vistas/Consultas/consultasCreate">Crear Consultas</a>
-                <a class="dropdown-item" href="/vistas/Consultas/consultasShow">Ver Consultas Creadas</a>
-            </div>
+                <button class="dropdown-btn">Consultas
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                    <a class="dropdown-item" href="/vistas/Consultas/consultasCreate">Crear Consultas</a>
+                    <a class="dropdown-item" href="/vistas/Consultas/consultasShow">Ver Consultas Creadas</a>
+                </div>
 
-            <button class="dropdown-btn">Citas
-                <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-container">
-                <a class="dropdown-item" href="/vistas/Citas/citasCreate">Crear Citas</a>
-                <a class="dropdown-item" href="/vistas/Citas/citasShow">Ver Citas Creadas</a>
-            </div>
+                <button class="dropdown-btn">Citas
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                    <a class="dropdown-item" href="/vistas/Citas/citasCreate">Crear Citas</a>
+                    <a class="dropdown-item" href="/vistas/Citas/citasShow">Ver Citas Creadas</a>
+                </div>
 
-            <button class="dropdown-btn">Recetas
-                <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-container">
-                <a class="dropdown-item" href="/vistas/Recetas/recetasCreate">Crear Recetas</a>
-                <a class="dropdown-item" href="/vistas/Recetas/recetasShow">Ver Recetas Creadas</a>
-            </div>
+                <button class="dropdown-btn">Recetas
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                    <a class="dropdown-item" href="/vistas/Recetas/recetasCreate">Crear Recetas</a>
+                    <a class="dropdown-item" href="/vistas/Recetas/recetasShow">Ver Recetas Creadas</a>
+                </div>
 
-            <button class="dropdown-btn">Pacientes
-                <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-container">
-                <a class="dropdown-item" href="/vistas/Pacientes/pacientesCreate">Ingresar Pacientes</a>
-                <a class="dropdown-item" href="/vistas/Pacientes/pacientesShow">Ver Pacientes Ingresados</a>
-            </div>
+                <button class="dropdown-btn">Pacientes
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                    <a class="dropdown-item" href="/vistas/Pacientes/pacientesCreate">Ingresar Pacientes</a>
+                    <a class="dropdown-item" href="/vistas/Pacientes/pacientesShow">Ver Pacientes Ingresados</a>
+                </div>
 
-            <button class="dropdown-btn">Empleados
-                <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-container">
-                <a class="dropdown-item" href="/formEmpleado">Ingresar empleados</a>
-                <a class="dropdown-item" href="/consultaEmpleados">Consultar empleados</a>
-            </div>
+                <button class="dropdown-btn">Empleados
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                    <a class="dropdown-item" href="/formEmpleado">Ingresar empleados</a>
+                    <a class="dropdown-item" href="/consultaEmpleados">Consultar empleados</a>
+                </div>
+            @endif
+
+            @if (Auth::user()->estado == 'Doctor')
+                <a class="nav-link" href="/"> <i class="fa fa-solid fa-house"></i>&nbsp<span
+                        class="links">Inicio</span></a>
+                <a class="nav-link" href="/vistas/Doctores/doctoresShow"><i class="fa fa-solid fa-user-doctor"></i><span
+                        class="links">Doctores</span></a>
+
+                <button class="dropdown-btn">Consultas
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                    <a class="dropdown-item" href="/vistas/Consultas/consultasCreate">Crear Consultas</a>
+                    <a class="dropdown-item" href="/vistas/Consultas/consultasShow">Ver Consultas Creadas</a>
+                </div>
+
+                <button class="dropdown-btn">Citas
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                    <a class="dropdown-item" href="/vistas/Citas/citasCreate">Crear Citas</a>
+                    <a class="dropdown-item" href="/vistas/Citas/citasShow">Ver Citas Creadas</a>
+                </div>
+
+                <button class="dropdown-btn">Recetas
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                    <a class="dropdown-item" href="/vistas/Recetas/recetasCreate">Crear Recetas</a>
+                    <a class="dropdown-item" href="/vistas/Recetas/recetasShow">Ver Recetas Creadas</a>
+                </div>
+
+                <button class="dropdown-btn">Pacientes
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                    <a class="dropdown-item" href="/vistas/Pacientes/pacientesCreate">Ingresar Pacientes</a>
+                    <a class="dropdown-item" href="/vistas/Pacientes/pacientesShow">Ver Pacientes Ingresados</a>
+                </div>
+            @endif
+
+            @if (Auth::user()->estado == 'Secretaria')
+                <a class="nav-link" href="/"> <i class="fa fa-solid fa-house"></i>&nbsp<span
+                        class="links">Inicio</span></a>
+                <a class="nav-link" href="/vistas/Doctores/doctoresShow"><i class="fa fa-solid fa-user-doctor"></i><span
+                        class="links">Doctores</span></a>
+
+                <button class="dropdown-btn">Consultas
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                    <a class="dropdown-item" href="/vistas/Consultas/consultasCreate">Crear Consultas</a>
+                    <a class="dropdown-item" href="/vistas/Consultas/consultasShow">Ver Consultas Creadas</a>
+                </div>
+
+                <button class="dropdown-btn">Citas
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                    <a class="dropdown-item" href="/vistas/Citas/citasCreate">Crear Citas</a>
+                    <a class="dropdown-item" href="/vistas/Citas/citasShow">Ver Citas Creadas</a>
+                </div>
+            @endif
+
+            @if (Auth::user()->estado == 'Empleado')
+                <a class="nav-link" href="/"> <i class="fa fa-solid fa-house"></i>&nbsp<span
+                        class="links">Inicio</span></a>
+                <a class="nav-link" href="/vistas/Doctores/doctoresShow"><i class="fa fa-solid fa-user-doctor"></i><span
+                        class="links">Doctores</span></a>
+                <button class="dropdown-btn">Empleados
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                    <a class="dropdown-item" href="/consultaEmpleados">Consultar empleados</a>
+                </div>
+            @endif
 
             <button class="dropdown-btn">{{ Auth::user()->name }}
                 <i class="fa fa-solid fa-user"></i>

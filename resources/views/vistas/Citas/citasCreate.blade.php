@@ -97,13 +97,18 @@
                                     @if (old('fkDoctores') == $valor->idDoctores)
                                         <option selected value="{{ $valor->idDoctores }}">{{ $valor->nombre }}</option>
                                     @else
-                                        <option value="{{ $valor->idDoctores }}">{{ $valor->nombre }}</option>
+                                        <option value="{{ $valor->idDoctores }}">{{ $valor->nombre }} - {{ $valor->disponibilidad }}</option>
                                     @endif
                                 @endforeach
                             </select>
                             @error('fkDoctores')
                                 <span class="invalid-feedback d-block" role="alert">
                                     <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            @if(session('doctorDisponible'))
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ session('doctorDisponible') }}</strong>
                                 </span>
                             @enderror
                         </div>

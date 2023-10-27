@@ -10,5 +10,5 @@ class ConsultasModel extends Model
     use HasFactory;
     protected $table= 'consultas';
     protected $primaryKey='idConsultas';
-    protected $fillable=['nombre_consultas','descripcion','f_consultas','idPacientes','idDoctores','created_at'];
+    protected $fillable=['nombre_consultas','descripcion','f_consulta','idPacientes','idDoctores','created_at'];
 }

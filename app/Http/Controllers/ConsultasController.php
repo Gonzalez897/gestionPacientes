@@ -17,13 +17,24 @@ class ConsultasController extends Controller
     public function index()
     {
         //
-        $consultas=ConsultasModel::select('consultas.idConsultas','consultas.nombre_consultas', 'consultas.descripcion', 'consultas.f_consulta','pacientes.nombre_paciente as NombreP', 'pacientes.apellido_paciene as ApellidoP', 'empleados.nombre as Doctor','empleados.apellido as DoctorA','doctores.especializacion as Especializacion', 'consultas.created_at')
-        ->from('consultas')->join('pacientes','consultas.idPacientes','=','pacientes.idPacientes')
-        ->join('doctores','consultas.idDoctores','=','doctores.idDoctores')
-        ->join('empleados','doctores.idEmpleados','=','empleados.idEmpleados')
-        ->where('empleados.cargo','=','doctor')
-        ->get();
-        return view('/vistas/Consultas/consultasShow')->with(['consultas'=>$consultas]);
+        $consultas = ConsultasModel::select(
+            'consultas.idConsultas',
+            'consultas.nombre_consultas',
+            'consultas.descripcion',
+            'consultas.f_consulta',
+            'pacientes.nombre_paciente as NombreP',
+            'pacientes.apellido_paciene as ApellidoP',
+            'empleados.nombre as Doctor',
+            'empleados.apellido as DoctorA',
+            'doctores.especializacion as Especializacion',
+            'consultas.created_at'
+        )
+            ->from('consultas')->join('pacientes', 'consultas.idPacientes', '=', 'pacientes.idPacientes')
+            ->join('doctores', 'consultas.idDoctores', '=', 'doctores.idDoctores')
+            ->join('empleados', 'doctores.idEmpleados', '=', 'empleados.idEmpleados')
+            ->where('empleados.cargo', '=', 'doctor')
+            ->get();
+        return view('/vistas/Consultas/consultasShow')->with(['consultas' => $consultas]);
     }
 
     /**
@@ -34,10 +45,10 @@ class ConsultasController extends Controller
     public function create()
     {
         //
-        $pacientes=PacientesModel::all();
-        $doctores=DoctorModel::select('doctores.especializacion','doctores.idDoctores', 'empleados.nombre', 'empleados.apellido')
-        ->from('doctores')->join('empleados','empleados.idEmpleados','=','doctores.idEmpleados')->get();
-        return view('/vistas/Consultas/consultasCreate')->with(['pacientes'=>$pacientes,'doctores'=>$doctores]);
+        $pacientes = PacientesModel::all();
+        $doctores = DoctorModel::select('doctores.especializacion', 'doctores.disponibilidad', 'doctores.idDoctores', 'empleados.nombre', 'empleados.apellido')
+            ->from('doctores')->join('empleados', 'empleados.idEmpleados', '=', 'doctores.idEmpleados')->get();
+        return view('/vistas/Consultas/consultasCreate')->with(['pacientes' => $pacientes, 'doctores' => $doctores]);
     }
 
     /**
@@ -49,16 +60,31 @@ class ConsultasController extends Controller
     public function store(Request $request)
     {
         //
-        $data=request()->validate([
-            'nombre_consultas'=>'required',
-            'descripcion'=>'required',
-            'f_consulta'=>'required',
-            'idPaciente'=>'required',
-            'idDoctores'=>'required'
+        $data = request()->validate([
+            'nombre_consultas' => 'required',
+            'descripcion' => 'required',
+            'f_consulta' => 'required',
+            'idPacientes' => 'required',
+            'idDoctores' => 'required'
         ]);
 
-        ConsultasModel::create($data);
-        return redirect('/vistas/Consultas/consultasShow');
+        $consulta_doctores = DoctorModel::find($data['idDoctores']);
+
+        if ($consulta_doctores->disponibilidad != "No disponible") {
+            $consulta_doctores->disponibilidad = "No disponible";
+            $consulta_doctores->save();
+
+            ConsultasModel::create($data);
+            return redirect('/vistas/Consultas/consultasShow');
+        } else {
+
+            session()->flash('doctorDisponible', "El doctor seleccionado no se encuentra disponible");
+            
+            $pacientes = PacientesModel::all();
+            $doctores = DoctorModel::select('doctores.especializacion', 'doctores.disponibilidad', 'doctores.idDoctores', 'empleados.nombre', 'empleados.apellido')
+                ->from('doctores')->join('empleados', 'empleados.idEmpleados', '=', 'doctores.idEmpleados')->get();
+            return view('/vistas/Consultas/consultasCreate')->with(['pacientes' => $pacientes, 'doctores' => $doctores]);
+        }
     }
 
     /**
@@ -81,17 +107,17 @@ class ConsultasController extends Controller
     public function edit(ConsultasModel $consultas)
     {
         //
-        $pacientes=PacientesModel::select('*')
-        ->from('pacientes')
-        ->where('idPacientes',$consultas->idPacientes)
-        ->get();
-        $doctores=DoctorModel::select('doctores.especializacion','doctores.idDoctores','empleados.nombre', 'empleados.apellido')
-        ->from('doctores')->join('empleados','empleados.idEmpleados','=','doctores.idEmpleados')
-        ->get();
+        $pacientes = PacientesModel::select('*')
+            ->from('pacientes')
+            ->where('idPacientes', $consultas->idPacientes)
+            ->get();
+        $doctores = DoctorModel::select('doctores.especializacion', 'doctores.idDoctores', 'empleados.nombre', 'empleados.apellido')
+            ->from('doctores')->join('empleados', 'empleados.idEmpleados', '=', 'doctores.idEmpleados')
+            ->get();
 
-        
 
-        return view('/vistas/Consultas/consultasUpdate')->with(['consultas'=>$consultas,'pacientes'=>$pacientes,'doctores'=>$doctores]);
+
+        return view('/vistas/Consultas/consultasUpdate')->with(['consultas' => $consultas, 'pacientes' => $pacientes, 'doctores' => $doctores]);
     }
 
     /**
@@ -105,20 +131,20 @@ class ConsultasController extends Controller
     {
         //
 
-        $data=request()->validate([
-            'nombre_consultas'=>'required',
-            'descripcion'=>'required',
-            'f_consulta'=>'required',
-            'idPaciente'=>'required',
-            'idDoctores'=>'required'
+        $data = request()->validate([
+            'nombre_consultas' => 'required',
+            'descripcion' => 'required',
+            'f_consulta' => 'required',
+            'idPaciente' => 'required',
+            'idDoctores' => 'required'
         ]);
 
-        $consultas->nombre_consultas=$data['nombre_consultas'];
-        $consultas->descripcion=$data['descripcion'];
-        $consultas->f_consulta=$data['f_consulta'];
-        $consultas->idPaciente=$data['idPaciente'];
-        $consultas->idDoctores=$data['idDoctores'];
-        $consultas->updated_at=now();
+        $consultas->nombre_consultas = $data['nombre_consultas'];
+        $consultas->descripcion = $data['descripcion'];
+        $consultas->f_consulta = $data['f_consulta'];
+        $consultas->idPaciente = $data['idPaciente'];
+        $consultas->idDoctores = $data['idDoctores'];
+        $consultas->updated_at = now();
         $consultas->save();
 
         return redirect('/vistas/Consultas/consultasShow');
@@ -134,6 +160,6 @@ class ConsultasController extends Controller
     {
         //
         ConsultasModel::destroy($id);
-        return response()->json(array('res'=>true));
+        return response()->json(array('res' => true));
     }
 }

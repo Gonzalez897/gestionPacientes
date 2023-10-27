@@ -59,7 +59,11 @@
                             <select name="id_usuario" class="form-control">
                                 <option value="">~</option>
                                 @foreach ($usuarios as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @if (old('id_usuario') == $item->id)
+                                        <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                                    @else
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                             @error('id_usuario')
@@ -72,11 +76,34 @@
                                 <span>Rol del empleado</span><span class="text-danger">*</span>
                                 <br>
                                 <select name="rol_usuario" class="form-control">
-                                    <option value="">~</option>
-                                    <option value="Secretaria">Secretaria</option>
-                                    <option value="Doctor">Doctor</option>
-                                    @if (Auth::user()->estado == 'superusuario')
-                                        <option value="superusuario">SuperUsuario</option>
+                                    @if (old('rol_usuario') == 'Secretaria')
+                                        <option value="">~</option>
+                                        <option value="Secretaria" selected>Secretaria</option>
+                                        <option value="Doctor">Doctor</option>
+                                        @if (Auth::user()->estado == 'superusuario')
+                                            <option value="superusuario">SuperUsuario</option>
+                                        @endif
+                                    @elseif (old('rol_usuario') == 'Doctor')
+                                        <option value="">~</option>
+                                        <option value="Secretaria">Secretaria</option>
+                                        <option value="Doctor" selected>Doctor</option>
+                                        @if (Auth::user()->estado == 'superusuario')
+                                            <option value="superusuario">SuperUsuario</option>
+                                        @endif
+                                    @elseif (old('rol_usuario') == 'superusuario')
+                                        <option value="">~</option>
+                                        <option value="Secretaria">Secretaria</option>
+                                        <option value="Doctor">Doctor</option>
+                                        @if (Auth::user()->estado == 'superusuario')
+                                            <option value="superusuario" selected>SuperUsuario</option>
+                                        @endif
+                                    @else
+                                        <option value="">~</option>
+                                        <option value="Secretaria">Secretaria</option>
+                                        <option value="Doctor">Doctor</option>
+                                        @if (Auth::user()->estado == 'superusuario')
+                                            <option value="superusuario">SuperUsuario</option>
+                                        @endif
                                     @endif
                                 </select>
                             </div>
@@ -150,9 +177,9 @@
                         <br>
                         <span>Dui del empleado</span><span class="text-danger">*</span>
                         <br>
-                        <input class="form-control" type="text" name="dui_empleado"
-                            value="{{ old('dui_empleado') }}">
-                        @error('dui_empleado')
+                        <input class="form-control" type="text" name="dui" id="inputDui" maxlength="10"
+                            value="{{ old('dui') }}">
+                        @error('dui')
                             <span class="invalid-feedback d-block" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -292,6 +319,24 @@
                 } else {
                     $('#divEspecializacion').hide();
                 }
+
+            });
+
+            $('#inputDui').keyup(function() {
+
+                var inputValue = $(this).val();
+
+                inputValue = inputValue.replace('-', '');
+
+                if (inputValue.length > 10) {
+                    inputValue = inputValue.slice(0, 10);
+                }
+
+                if (inputValue.length >= 1) {
+                    inputValue = inputValue.slice(0, -1) + '-' + inputValue.slice(-1);
+                }
+
+                $(this).val(inputValue);
 
             });
 

@@ -38,8 +38,8 @@
                             <td>Nombre de la consulta</td>
                             <td>Descripcion de sintomas</td>
                             <td>Fecha de la consulta</td>
-                            <td>Nombre y Apellido del Paciente</td>
-                            <td>Nombre y Apellido del Doctor</td>
+                            <td>Paciente</td>
+                            <td>Doctor</td>
                             <td>Especializacion</td>
                             <td>Fecha de creacion</td>
                             <td>Acciones</td>
@@ -50,10 +50,10 @@
                             <tr>
                                 <td>{{ $item->nombre_consultas }}</td>
                                 <td>{{ $item->descripcion }}</td>
-                                <td>{{ $item->f_consulta }} {{ $item->ApellidoP }}</td>
-                                <td>{{ $item->nombre_paciente }} {{ $item->apellido_paciene }}</td>
-                                <td>{{ $item->nombre }} {{ $item->apellido }}</td>
-                                <td>{{ $item->especializacion }}</td>
+                                <td>{{ $item->f_consulta }}</td>
+                                <td>{{ $item->NombreP }} {{ $item->ApellidoP }}</td>
+                                <td>{{ $item->Doctor }} {{ $item->DoctorA }}</td>
+                                <td>{{ $item->Especializacion }}</td>
                                 <td>{{ $item->created_at }}</td>
                                 <td>
                                     <a href="/vistas/Consultas/consultasEdit/{{ $item->idConsultas }}"
